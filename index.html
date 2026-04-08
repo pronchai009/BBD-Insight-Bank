@@ -343,7 +343,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
    ================================================================ */
 
 const SHEET_ID = '1X2Qfkvkb4XGotBYesjfHn-TfqArk3LoxmiHgskEsG3s';
-const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwF0da3VbMvdW58OdV98EwIznX2t0F78QGnBAksc6Z0KCTCbzFt5YMpyXbKd6ERjYX9LQ/exec';
+const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwJVLvs5kNpmrbhSHjR5VGGVpuVbgfiT6kVKgDR8qUjE3lBQspnlZktYWBkpymoPYUmqw/exec';
 const USE_SHEETS = SHEET_ID !== '1X2Qfkvkb4XGotBYesjfHn-TfqArk3LoxmiHgskEsG3s';
 
 /* ================================================================
@@ -418,7 +418,7 @@ async function loadFromSheets(){
 }
 
 async function saveToSheets(action,data){
-  if(!USE_SHEETS||APPS_SCRIPT_URL==='https://script.google.com/macros/s/AKfycbwF0da3VbMvdW58OdV98EwIznX2t0F78QGnBAksc6Z0KCTCbzFt5YMpyXbKd6ERjYX9LQ/exec')return;
+  if(!USE_SHEETS||APPS_SCRIPT_URL==='https://script.google.com/macros/s/AKfycbwJVLvs5kNpmrbhSHjR5VGGVpuVbgfiT6kVKgDR8qUjE3lBQspnlZktYWBkpymoPYUmqw/exec')return;
   try{await fetch(APPS_SCRIPT_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify({action,data})});}
   catch(e){console.warn('Sheets write failed:',e);}
 }
