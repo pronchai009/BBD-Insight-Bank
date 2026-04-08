@@ -343,7 +343,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
    ================================================================ */
 
 const SHEET_ID = '1X2Qfkvkb4XGotBYesjfHn-TfqArk3LoxmiHgskEsG3s';
-const APPS_SCRIPT_URL = 'https://script.google.com/a/macros/bakebread.digital/s/AKfycbwPG3JZA6U71-ue8zG-XTqFx84YWOpgHVf4V9KWhzel6pp_onEMoVEKtVtQgCMcv2xmzQ/exec';
+const APPS_SCRIPT_URL = 'https://script.google.com/a/macros/bakebread.digital/s/AKfycbzLGpN5GszX29WfF1XVzmbq_G_Q7zQnKorm2mZFbaC4FtzDMm-Iw0L34Bc2cED-n41dvg/exec';
 const USE_SHEETS = SHEET_ID !== '1X2Qfkvkb4XGotBYesjfHn-TfqArk3LoxmiHgskEsG3s';
 
 /* ================================================================
@@ -357,15 +357,15 @@ let USERS = {
 
 const CATS = {
   camp:    {label:'Campaign Learnings', icon:'📊'},
-  content: {label:'Tool Learnings',  icon:'📋'},
+  tool:    {label:'Tool Learnings',     icon:'📋'},
   kol:     {label:'KOL Learnings',      icon:'👤'},
 };
 
 let DB = [
   {id:1,type:'camp',sub:'Hook & Format',title:'Tineco Q4 — Reels Hook Before/After',body:'Hook แบบ before/after ใน 3 วินาทีแรก ให้ Watch Rate สูงกว่า product showcase ถึง 40% ในกลุ่มแม่บ้าน 28–35 ปี ควร brief KOL ไม่ให้มีการพูดถึง brand ก่อน hook เสมอ',tags:['Reels','Hook','Watch Rate'],client:'Tineco TH',platform:'Instagram',date:'Mar 2025',author:'long@bakebread.digital',comments:[]},
   {id:2,type:'camp',sub:'Performance',title:'xBloom TH — TikTok Founder Story Q1',body:'Video ที่ founder เล่าเรื่องเองให้ Share Rate สูงสุด ควร brief KOL ให้เล่าในสไตล์ "ค้นพบ" มากกว่า review ตรงๆ',tags:['TikTok','Storytelling'],client:'xBloom TH',platform:'TikTok',date:'Mar 2025',author:'ploy@bakebread.digital',comments:[{id:1,author:'long@bakebread.digital',text:'เห็นด้วย — brief แบบนี้ให้ผลชัดมาก',date:'Apr 2025'}]},
-  {id:3,type:'content',sub:'Carousel Format',title:'3-Slide Reveal สำหรับ Niche Product',body:'Slide 1 = pain point / Slide 2 = solution / Slide 3 = reveal + CTA — Save Rate สูงกว่า 2 เท่า',tags:['Carousel','Niche'],client:'ทุก client',platform:'Instagram',date:'Feb 2025',author:'long@bakebread.digital',comments:[]},
-  {id:4,type:'content',sub:'Hook Writing',title:'Hook 3 วินาที — Formula ที่ทดสอบแล้ว',body:'[ปัญหา] + [คำถาม Rhetorical] เช่น "ทำไมบ้านยังไม่สะอาดทั้งที่กวาดทุกวัน?" อย่าเริ่มด้วย brand name',tags:['Hook','Formula'],client:'ทุก client',platform:'TikTok/Reels',date:'Jan 2025',author:'beam@bakebread.digital',comments:[]},
+  {id:3,type:'camp',sub:'Carousel Format',title:'3-Slide Reveal สำหรับ Niche Product',body:'Slide 1 = pain point / Slide 2 = solution / Slide 3 = reveal + CTA — Save Rate สูงกว่า 2 เท่า',tags:['Carousel','Niche'],client:'ทุก client',platform:'Instagram',date:'Feb 2025',author:'long@bakebread.digital',comments:[]},
+  {id:4,type:'tool',sub:'Hook Writing',title:'Hook 3 วินาที — Formula ที่ทดสอบแล้ว',body:'[ปัญหา] + [คำถาม Rhetorical] เช่น "ทำไมบ้านยังไม่สะอาดทั้งที่กวาดทุกวัน?" อย่าเริ่มด้วย brand name',tags:['Hook','Formula'],client:'ทุก client',platform:'TikTok/Reels',date:'Jan 2025',author:'beam@bakebread.digital',comments:[]},
   {id:5,type:'kol',sub:'Nano Tier',title:'@mildnarak_xx — nano lifestyle',body:'Engagement จริงสูง (~8%) แต่ audience Gen Z 18–22 ไม่ match กับ Tineco target ราคา 3,500฿/โพสต์',tags:['Nano','GenZ'],client:'—',platform:'TikTok',date:'Jan 2025',author:'long@bakebread.digital',comments:[]},
   {id:6,type:'kol',sub:'Micro Tier',title:'@sunsusnack_fan — micro food creator',body:'Delivery ดีมาก แต่ engagement drop หลัง collab ครั้งแรก ควร brief ให้ organic มากขึ้น ราคา 8,000฿/โพสต์',tags:['Micro','Food'],client:'Sunsu',platform:'Instagram',date:'Feb 2025',author:'ploy@bakebread.digital',comments:[]},
 ];
