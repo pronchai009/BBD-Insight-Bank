@@ -7,795 +7,702 @@
 <style>
 *{box-sizing:border-box;margin:0;padding:0;}
 body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f8f7f4;color:#1a1a1a;min-height:100vh;}
-:root{--ci-main:#FFB115;--ci-second:#FFE422;--ci-dark:#1B2630;--ci-main-light:#FFF3D6;--ci-main-mid:#FFD070;--bg:#f8f7f4;--surface:#ffffff;--border:#e5e3de;--border-h:#c8c5be;--text:#1a1a1a;--text-s:#6b6966;--text-t:#9e9b96;--radius:10px;--radius-lg:14px;}
-.wrap{max-width:900px;margin:0 auto;padding:0 1.25rem 3rem;}
-
-/* LOGIN */
-.login-screen{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:1.5rem;}
-.login-card{width:100%;max-width:360px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,0.06);}
-.login-header{background:var(--ci-dark);padding:2rem;text-align:center;}
-.login-mark{width:48px;height:48px;background:var(--ci-main);border-radius:12px;display:inline-flex;align-items:center;justify-content:center;color:var(--ci-dark);font-size:20px;font-weight:700;margin-bottom:10px;}
-.login-header h1{font-size:16px;font-weight:600;color:#fff;margin-bottom:3px;}
-.login-header p{font-size:12px;color:rgba(255,255,255,0.45);}
-.login-body{padding:1.75rem;}
-.field{margin-bottom:14px;}
-.field label{font-size:11px;color:var(--text-s);display:block;margin-bottom:5px;text-transform:uppercase;letter-spacing:0.5px;}
-.field input{width:100%;font-size:13px;border:1px solid var(--border);border-radius:var(--radius);padding:9px 11px;background:#fff;color:var(--text);outline:none;transition:border-color .15s;}
-.field input:focus{border-color:var(--ci-main);}
-.login-btn{width:100%;padding:10px;border-radius:var(--radius);border:none;background:var(--ci-main);color:var(--ci-dark);font-size:13px;font-weight:600;cursor:pointer;}
-.login-btn:hover{background:var(--ci-main-mid);}
-.login-hint{font-size:11px;color:var(--text-t);text-align:center;margin-top:12px;line-height:1.7;}
-.login-err{font-size:12px;color:#c0392b;text-align:center;margin-top:8px;display:none;}
-
-/* APP SHELL */
-.app-shell{display:none;}
-.app-shell.active{display:block;}
-
-/* TOPBAR */
-.topbar{background:#fff;border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100;}
+:root{--ci:#FFB115;--ci2:#FFE422;--dark:#1B2630;--cil:#FFF3D6;--cim:#FFD070;--bg:#f8f7f4;--sur:#fff;--bdr:#e5e3de;--bdrh:#c8c5be;--tx:#1a1a1a;--txs:#6b6966;--txt:#9e9b96;--r:10px;--rl:14px;}
+.topbar{background:#fff;border-bottom:1px solid var(--bdr);position:sticky;top:0;z-index:100;}
 .topbar-inner{max-width:900px;margin:0 auto;padding:0 1.25rem;display:flex;align-items:center;gap:10px;height:52px;}
-.home-btn{display:flex;align-items:center;gap:6px;padding:6px 10px;border-radius:var(--radius);border:1px solid var(--border);background:transparent;cursor:pointer;color:var(--text-s);font-size:12px;white-space:nowrap;}
+.home-btn{display:flex;align-items:center;gap:6px;padding:6px 10px;border-radius:var(--r);border:1px solid var(--bdr);background:transparent;cursor:pointer;color:var(--txs);font-size:12px;}
 .home-btn:hover{background:var(--bg);}
-.search-wrap{flex:1;display:flex;align-items:center;gap:8px;background:var(--bg);border:1px solid var(--border);border-radius:999px;padding:7px 14px;}
-.search-wrap input{border:none;background:transparent;font-size:13px;color:var(--text);outline:none;width:100%;}
-.search-wrap input::placeholder{color:var(--text-t);}
+.search-wrap{flex:1;display:flex;align-items:center;gap:8px;background:var(--bg);border:1px solid var(--bdr);border-radius:999px;padding:7px 14px;}
+.search-wrap input{border:none;background:transparent;font-size:13px;color:var(--tx);outline:none;width:100%;}
+.search-wrap input::placeholder{color:var(--txt);}
 .top-actions{display:flex;align-items:center;gap:7px;flex-shrink:0;}
-.add-btn{display:flex;align-items:center;gap:5px;padding:7px 14px;border-radius:var(--radius);border:none;background:var(--ci-main);color:var(--ci-dark);font-size:12px;cursor:pointer;font-weight:600;}
-.add-btn:hover{background:var(--ci-main-mid);}
-.admin-btn{display:flex;align-items:center;gap:4px;padding:7px 11px;border-radius:var(--radius);border:1px solid var(--border);background:transparent;color:var(--text-s);font-size:12px;cursor:pointer;}
+.add-btn{display:flex;align-items:center;gap:5px;padding:7px 14px;border-radius:var(--r);border:none;background:var(--ci);color:var(--dark);font-size:12px;cursor:pointer;font-weight:600;}
+.add-btn:hover{background:var(--cim);}
+.admin-btn{display:none;align-items:center;gap:4px;padding:7px 11px;border-radius:var(--r);border:1px solid var(--bdr);background:transparent;color:var(--txs);font-size:12px;cursor:pointer;}
 .admin-btn:hover{background:var(--bg);}
-.avatar-btn{width:32px;height:32px;border-radius:50%;border:1px solid var(--border);cursor:pointer;overflow:hidden;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;flex-shrink:0;background:var(--ci-main-light);color:var(--ci-dark);}
+.login-topbtn{padding:6px 13px;border-radius:var(--r);border:1px solid var(--bdr);background:transparent;color:var(--txs);font-size:12px;cursor:pointer;}
+.login-topbtn:hover{background:var(--bg);}
+.avatar-btn{width:32px;height:32px;border-radius:50%;border:1px solid var(--bdr);cursor:pointer;overflow:hidden;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;flex-shrink:0;background:var(--cil);color:var(--dark);}
 .avatar-btn img{width:100%;height:100%;object-fit:cover;}
-
-/* BREADCRUMB */
-.breadcrumb{display:flex;align-items:center;gap:5px;padding:14px 0 6px;font-size:12px;color:var(--text-s);flex-wrap:wrap;}
-.bc-item{cursor:pointer;color:var(--text-s);}
-.bc-item:hover{color:var(--text);}
-.bc-sep{color:var(--border-h);}
-.bc-current{color:var(--text);font-weight:500;}
-
-/* PAGES */
-.page{display:none;}
-.page.active{display:block;}
-
-/* HERO */
-.hero{background:var(--ci-dark);border-radius:var(--radius-lg);padding:1.5rem 1.75rem;margin:1.25rem 0 1.5rem;color:#fff;position:relative;overflow:hidden;}
-.hero::after{content:'';position:absolute;right:-30px;top:-30px;width:120px;height:120px;background:var(--ci-main);opacity:0.1;border-radius:50%;}
-.hero-sub{font-size:11px;opacity:0.55;margin-bottom:4px;letter-spacing:0.3px;}
+.wrap{max-width:900px;margin:0 auto;padding:0 1.25rem 3rem;}
+.breadcrumb{display:flex;align-items:center;gap:5px;padding:14px 0 6px;font-size:12px;color:var(--txs);flex-wrap:wrap;}
+.bc-item{cursor:pointer;} .bc-item:hover{color:var(--tx);}
+.bc-sep{color:var(--bdrh);} .bc-cur{color:var(--tx);font-weight:500;}
+.page{display:none;} .page.active{display:block;}
+.hero{background:var(--dark);border-radius:var(--rl);padding:1.5rem 1.75rem;margin:1.25rem 0 1.5rem;color:#fff;position:relative;overflow:hidden;}
+.hero::after{content:'';position:absolute;right:-30px;top:-30px;width:120px;height:120px;background:var(--ci);opacity:0.1;border-radius:50%;}
+.hero-sub{font-size:11px;opacity:0.55;margin-bottom:4px;}
 .hero-title{font-size:20px;font-weight:600;}
-.hero-accent{color:var(--ci-main);}
-
-/* SECTION LABEL */
-.section-label{font-size:11px;font-weight:600;color:var(--text-s);text-transform:uppercase;letter-spacing:0.8px;margin-bottom:12px;}
-
-/* CAT GRID */
+.hero-acc{color:var(--ci);}
+.slabel{font-size:11px;font-weight:600;color:var(--txs);text-transform:uppercase;letter-spacing:0.8px;margin-bottom:12px;}
 .cat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;}
-.cat-card{display:flex;flex-direction:column;align-items:center;gap:8px;padding:18px 10px;border:1px solid var(--border);border-radius:var(--radius-lg);cursor:pointer;background:var(--surface);transition:border-color .15s,box-shadow .15s;}
-.cat-card:hover{border-color:var(--ci-main);box-shadow:0 2px 12px rgba(255,177,21,0.12);}
-.cat-icon{width:42px;height:42px;border-radius:var(--radius);display:flex;align-items:center;justify-content:center;font-size:18px;background:var(--ci-main-light);}
-.cat-label{font-size:12px;text-align:center;color:var(--text);font-weight:500;line-height:1.4;}
-.cat-count{font-size:11px;color:var(--text-t);}
-
-/* SEARCH RESULTS */
+.cat-card{display:flex;flex-direction:column;align-items:center;gap:8px;padding:18px 10px;border:1px solid var(--bdr);border-radius:var(--rl);cursor:pointer;background:var(--sur);transition:border-color .15s;}
+.cat-card:hover{border-color:var(--ci);}
+.cat-icon{width:42px;height:42px;border-radius:var(--r);display:flex;align-items:center;justify-content:center;font-size:18px;background:var(--cil);}
+.cat-label{font-size:12px;text-align:center;color:var(--tx);font-weight:500;line-height:1.4;}
+.cat-count{font-size:11px;color:var(--txt);}
 .result-list{display:flex;flex-direction:column;gap:3px;}
-.result-item{display:flex;align-items:flex-start;gap:10px;padding:12px 14px;border-radius:var(--radius);cursor:pointer;border:1px solid transparent;background:var(--surface);}
-.result-item:hover{border-color:var(--border);background:#fff;}
-.result-dot{width:20px;height:20px;border-radius:50%;background:var(--ci-main-light);color:var(--ci-dark);display:flex;align-items:center;justify-content:center;font-size:9px;flex-shrink:0;margin-top:1px;}
-.result-title{font-size:13px;font-weight:500;color:var(--text);margin-bottom:3px;}
-.result-path{font-size:11px;color:var(--text-s);}
-
-/* CATEGORY */
+.result-item{display:flex;align-items:flex-start;gap:10px;padding:12px 14px;border-radius:var(--r);cursor:pointer;border:1px solid transparent;background:var(--sur);}
+.result-item:hover{border-color:var(--bdr);}
+.rdot{width:20px;height:20px;border-radius:50%;background:var(--cil);color:var(--dark);display:flex;align-items:center;justify-content:center;font-size:9px;flex-shrink:0;margin-top:1px;}
+.rtitle{font-size:13px;font-weight:500;color:var(--tx);margin-bottom:3px;}
+.rpath{font-size:11px;color:var(--txs);}
 .topic-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
-.topic-group{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:14px 16px;}
-.tg-title{font-size:12px;font-weight:600;color:var(--text);margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid var(--border);}
-.tg-item{display:flex;align-items:flex-start;gap:7px;padding:7px 0;cursor:pointer;border-bottom:1px solid var(--border);}
+.topic-group{background:var(--sur);border:1px solid var(--bdr);border-radius:var(--rl);padding:14px 16px;}
+.tg-title{font-size:12px;font-weight:600;color:var(--tx);margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid var(--bdr);}
+.tg-item{display:flex;align-items:flex-start;gap:7px;padding:7px 0;cursor:pointer;border-bottom:1px solid var(--bdr);}
 .tg-item:last-child{border-bottom:none;padding-bottom:0;}
-.tg-item:hover .tg-name{color:var(--ci-dark);}
-.tg-dot{width:14px;height:14px;border-radius:50%;background:var(--ci-main-light);display:flex;align-items:center;justify-content:center;font-size:7px;flex-shrink:0;margin-top:2px;color:var(--ci-dark);}
-.tg-name{font-size:12px;color:var(--text);line-height:1.4;}
-
-/* ARTICLE */
+.tg-item:hover .tg-name{color:var(--ci);}
+.tg-dot{width:14px;height:14px;border-radius:50%;background:var(--cil);display:flex;align-items:center;justify-content:center;font-size:7px;flex-shrink:0;margin-top:2px;color:var(--dark);}
+.tg-name{font-size:12px;color:var(--tx);line-height:1.4;}
 .article-layout{display:flex;gap:16px;align-items:flex-start;}
 .sidebar{width:180px;flex-shrink:0;position:sticky;top:68px;}
-.sidebar-title{font-size:10px;font-weight:600;color:var(--text-s);text-transform:uppercase;letter-spacing:0.6px;margin-bottom:8px;}
-.sidebar-item{font-size:11px;padding:6px 9px;border-radius:var(--radius);cursor:pointer;color:var(--text-s);border:1px solid transparent;margin-bottom:3px;line-height:1.4;}
-.sidebar-item:hover{background:var(--surface);}
-.sidebar-item.active{background:var(--ci-main-light);border-color:var(--ci-main-mid);color:var(--ci-dark);font-weight:500;}
-.article-body{flex:1;min-width:0;}
-.article-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:1.5rem;}
-.article-badge{display:inline-flex;align-items:center;gap:4px;font-size:11px;padding:3px 10px;border-radius:999px;background:var(--ci-main-light);color:var(--ci-dark);margin-bottom:10px;font-weight:500;}
-.article-title-row{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:6px;}
-.article-title{font-size:18px;font-weight:600;color:var(--text);line-height:1.4;}
-.article-actions{display:flex;gap:6px;flex-shrink:0;}
-.action-btn{padding:5px 11px;border-radius:var(--radius);font-size:11px;cursor:pointer;border:1px solid var(--border);background:transparent;color:var(--text-s);}
-.action-btn:hover{background:var(--bg);}
-.action-btn.del{color:#c0392b;border-color:#f5c6c6;}
-.action-btn.del:hover{background:#fff5f5;}
-.article-meta-row{display:flex;align-items:center;gap:12px;margin-bottom:14px;flex-wrap:wrap;}
-.article-date{font-size:11px;color:var(--text-t);}
-.author-chip{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--text-s);}
-.author-av{width:18px;height:18px;border-radius:50%;background:var(--ci-main-light);border:1px solid var(--ci-main-mid);display:flex;align-items:center;justify-content:center;font-size:9px;overflow:hidden;color:var(--ci-dark);}
+.sb-title{font-size:10px;font-weight:600;color:var(--txs);text-transform:uppercase;letter-spacing:0.6px;margin-bottom:8px;}
+.sb-item{font-size:11px;padding:6px 9px;border-radius:var(--r);cursor:pointer;color:var(--txs);border:1px solid transparent;margin-bottom:3px;line-height:1.4;}
+.sb-item:hover{background:var(--sur);}
+.sb-item.active{background:var(--cil);border-color:var(--cim);color:var(--dark);font-weight:500;}
+.art-card{background:var(--sur);border:1px solid var(--bdr);border-radius:var(--rl);padding:1.5rem;}
+.art-badge{display:inline-flex;align-items:center;gap:4px;font-size:11px;padding:3px 10px;border-radius:999px;background:var(--cil);color:var(--dark);margin-bottom:10px;font-weight:500;}
+.art-title-row{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:6px;}
+.art-title{font-size:18px;font-weight:600;color:var(--tx);line-height:1.4;}
+.art-actions{display:flex;gap:6px;flex-shrink:0;}
+.abtn{padding:5px 11px;border-radius:var(--r);font-size:11px;cursor:pointer;border:1px solid var(--bdr);background:transparent;color:var(--txs);}
+.abtn:hover{background:var(--bg);}
+.abtn.del{color:#c0392b;border-color:#f5c6c6;}
+.abtn.del:hover{background:#fff5f5;}
+.art-meta-row{display:flex;align-items:center;gap:12px;margin-bottom:14px;flex-wrap:wrap;}
+.art-date{font-size:11px;color:var(--txt);}
+.author-chip{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--txs);}
+.author-av{width:18px;height:18px;border-radius:50%;background:var(--cil);border:1px solid var(--cim);display:flex;align-items:center;justify-content:center;font-size:9px;overflow:hidden;color:var(--dark);}
 .author-av img{width:100%;height:100%;object-fit:cover;}
-.article-content{font-size:14px;color:var(--text);line-height:1.9;background:var(--bg);border-radius:var(--radius);padding:16px;border:1px solid var(--border);}
-.article-tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:14px;}
-.a-tag{font-size:11px;padding:3px 9px;border:1px solid var(--border);border-radius:999px;color:var(--text-s);}
-.divider{height:1px;background:var(--border);margin:14px 0;}
+.art-body{font-size:14px;color:var(--tx);line-height:1.9;background:var(--bg);border-radius:var(--r);padding:16px;border:1px solid var(--bdr);}
+.art-tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:14px;}
+.a-tag{font-size:11px;padding:3px 9px;border:1px solid var(--bdr);border-radius:999px;color:var(--txs);}
+.divider{height:1px;background:var(--bdr);margin:14px 0;}
 .meta-chips{display:flex;gap:16px;flex-wrap:wrap;}
-.meta-chip{font-size:12px;color:var(--text-s);}
-.meta-chip strong{color:var(--text);font-weight:500;}
-
-/* COMMENTS */
-.comments-section{margin-top:16px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:1.25rem;}
-.comments-title{font-size:12px;font-weight:600;color:var(--text-s);text-transform:uppercase;letter-spacing:0.6px;margin-bottom:12px;}
-.comment-item{display:flex;gap:10px;margin-bottom:12px;}
-.comment-av{width:26px;height:26px;border-radius:50%;background:var(--ci-main-light);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;flex-shrink:0;color:var(--ci-dark);overflow:hidden;}
-.comment-av img{width:100%;height:100%;object-fit:cover;}
-.comment-bubble{background:var(--bg);border-radius:0 var(--radius) var(--radius) var(--radius);padding:9px 12px;flex:1;border:1px solid var(--border);}
-.comment-author{font-size:11px;font-weight:600;color:var(--text);margin-bottom:3px;}
-.comment-text{font-size:12px;color:var(--text-s);line-height:1.6;}
-.comment-input-row{display:flex;gap:8px;margin-top:10px;align-items:flex-end;}
-.comment-input{flex:1;font-size:12px;border:1px solid var(--border);border-radius:var(--radius);padding:8px 10px;background:#fff;color:var(--text);outline:none;resize:none;line-height:1.5;}
-.comment-input:focus{border-color:var(--ci-main);}
-.comment-send{padding:8px 14px;border-radius:var(--radius);border:none;background:var(--ci-main);color:var(--ci-dark);font-size:12px;font-weight:600;cursor:pointer;}
-
-/* PROFILE */
-.profile-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:1.5rem;margin-bottom:1.5rem;display:flex;align-items:center;gap:18px;}
-.profile-av{width:64px;height:64px;border-radius:50%;background:var(--ci-main-light);border:2px solid var(--ci-main-mid);display:flex;align-items:center;justify-content:center;font-size:22px;overflow:hidden;cursor:pointer;position:relative;flex-shrink:0;color:var(--ci-dark);}
-.profile-av img{width:100%;height:100%;object-fit:cover;}
-.profile-av-overlay{position:absolute;inset:0;background:rgba(0,0,0,0.3);display:flex;align-items:center;justify-content:center;font-size:10px;color:#fff;opacity:0;transition:opacity .15s;border-radius:50%;}
-.profile-av:hover .profile-av-overlay{opacity:1;}
-.profile-name{font-size:16px;font-weight:600;color:var(--text);}
-.role-badge{display:inline-flex;align-items:center;font-size:10px;padding:2px 9px;border-radius:999px;margin-left:7px;}
-.rb-admin{background:var(--ci-main);color:var(--ci-dark);}
+.mc{font-size:12px;color:var(--txs);} .mc strong{color:var(--tx);font-weight:500;}
+.cmt-section{margin-top:16px;background:var(--sur);border:1px solid var(--bdr);border-radius:var(--rl);padding:1.25rem;}
+.cmt-title{font-size:12px;font-weight:600;color:var(--txs);text-transform:uppercase;letter-spacing:0.6px;margin-bottom:12px;}
+.cmt-item{display:flex;gap:10px;margin-bottom:12px;}
+.cmt-av{width:26px;height:26px;border-radius:50%;background:var(--cil);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;flex-shrink:0;color:var(--dark);overflow:hidden;}
+.cmt-av img{width:100%;height:100%;object-fit:cover;}
+.cmt-bubble{background:var(--bg);border-radius:0 var(--r) var(--r) var(--r);padding:9px 12px;flex:1;border:1px solid var(--bdr);}
+.cmt-author{font-size:11px;font-weight:600;color:var(--tx);margin-bottom:3px;}
+.cmt-text{font-size:12px;color:var(--txs);line-height:1.6;}
+.cmt-input-row{display:flex;gap:8px;margin-top:10px;align-items:flex-end;}
+.cmt-input{flex:1;font-size:12px;border:1px solid var(--bdr);border-radius:var(--r);padding:8px 10px;background:#fff;color:var(--tx);outline:none;resize:none;line-height:1.5;}
+.cmt-input:focus{border-color:var(--ci);}
+.cmt-send{padding:8px 14px;border-radius:var(--r);border:none;background:var(--ci);color:var(--dark);font-size:12px;font-weight:600;cursor:pointer;}
+.login-prompt{background:var(--cil);border:1px solid var(--cim);border-radius:var(--r);padding:10px 14px;font-size:12px;color:var(--dark);display:flex;align-items:center;justify-content:space-between;margin-top:10px;}
+.lp-btn{padding:5px 12px;border-radius:var(--r);border:none;background:var(--ci);color:var(--dark);font-size:11px;font-weight:600;cursor:pointer;}
+.profile-card{background:var(--sur);border:1px solid var(--bdr);border-radius:var(--rl);padding:1.5rem;margin-bottom:1.5rem;display:flex;align-items:center;gap:18px;}
+.p-av{width:64px;height:64px;border-radius:50%;background:var(--cil);border:2px solid var(--cim);display:flex;align-items:center;justify-content:center;font-size:22px;overflow:hidden;cursor:pointer;position:relative;flex-shrink:0;color:var(--dark);}
+.p-av img{width:100%;height:100%;object-fit:cover;}
+.p-av-ov{position:absolute;inset:0;background:rgba(0,0,0,0.3);display:flex;align-items:center;justify-content:center;font-size:10px;color:#fff;opacity:0;transition:opacity .15s;border-radius:50%;}
+.p-av:hover .p-av-ov{opacity:1;}
+.p-name{font-size:16px;font-weight:600;color:var(--tx);}
+.rbadge{display:inline-flex;font-size:10px;padding:2px 9px;border-radius:999px;margin-left:7px;}
+.rb-admin{background:var(--ci);color:var(--dark);}
 .rb-editor{background:#dbeafe;color:#1e40af;}
-.rb-viewer{background:var(--bg);color:var(--text-s);border:1px solid var(--border);}
-.edit-name-btn{font-size:10px;color:var(--text-s);cursor:pointer;border:1px solid var(--border);padding:2px 8px;border-radius:999px;background:transparent;margin-left:6px;}
-.profile-email{font-size:12px;color:var(--text-s);margin-top:4px;}
-.profile-stats{display:flex;gap:16px;margin-top:8px;}
-.pstat{font-size:12px;color:var(--text-s);}
-.pstat strong{color:var(--text);font-weight:600;}
-.logout-btn{margin-left:auto;padding:7px 13px;border-radius:var(--radius);border:1px solid var(--border);background:transparent;color:var(--text-s);font-size:12px;cursor:pointer;flex-shrink:0;}
-.profile-article-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:12px 15px;cursor:pointer;display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:8px;}
-.profile-article-card:hover{border-color:var(--ci-main-mid);}
-.pac-title{font-size:13px;font-weight:500;color:var(--text);margin-bottom:4px;line-height:1.4;}
-.pac-meta{font-size:11px;color:var(--text-s);}
-
-/* ADMIN */
-.admin-banner{background:var(--ci-dark);border-radius:var(--radius-lg);padding:1.5rem 1.75rem;margin:1.25rem 0 1.5rem;display:flex;align-items:center;justify-content:space-between;}
+.rb-viewer{background:var(--bg);color:var(--txs);border:1px solid var(--bdr);}
+.p-email{font-size:12px;color:var(--txs);margin-top:4px;}
+.p-stats{display:flex;gap:16px;margin-top:8px;}
+.pstat{font-size:12px;color:var(--txs);} .pstat strong{color:var(--tx);font-weight:600;}
+.logout-btn{margin-left:auto;padding:7px 13px;border-radius:var(--r);border:1px solid var(--bdr);background:transparent;color:var(--txs);font-size:12px;cursor:pointer;flex-shrink:0;}
+.p-art-card{background:var(--sur);border:1px solid var(--bdr);border-radius:var(--rl);padding:12px 15px;cursor:pointer;display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:8px;}
+.p-art-card:hover{border-color:var(--cim);}
+.pac-title{font-size:13px;font-weight:500;color:var(--tx);margin-bottom:4px;line-height:1.4;}
+.pac-meta{font-size:11px;color:var(--txs);}
+.edit-name-btn{font-size:10px;color:var(--txs);cursor:pointer;border:1px solid var(--bdr);padding:2px 8px;border-radius:999px;background:transparent;margin-left:6px;}
+.name-edit-input{font-size:15px;font-weight:600;border:1px solid var(--ci);border-radius:var(--r);padding:3px 9px;color:var(--tx);background:#fff;outline:none;width:150px;}
+.admin-banner{background:var(--dark);border-radius:var(--rl);padding:1.5rem 1.75rem;margin:1.25rem 0 1.5rem;display:flex;align-items:center;justify-content:space-between;}
 .admin-banner h2{font-size:18px;font-weight:600;color:#fff;}
 .admin-banner p{font-size:12px;color:rgba(255,255,255,0.4);margin-top:3px;}
-.admin-banner-right{font-size:12px;font-weight:600;color:var(--ci-main);}
+.admin-banner-r{font-size:12px;font-weight:600;color:var(--ci);}
 .admin-tabs{display:flex;gap:5px;margin-bottom:1.5rem;}
-.admin-tab{padding:7px 16px;border-radius:999px;font-size:12px;cursor:pointer;border:1px solid var(--border);background:transparent;color:var(--text-s);}
-.admin-tab.active{background:var(--ci-main);color:var(--ci-dark);border-color:var(--ci-main);font-weight:600;}
+.admin-tab{padding:7px 16px;border-radius:999px;font-size:12px;cursor:pointer;border:1px solid var(--bdr);background:transparent;color:var(--txs);}
+.admin-tab.active{background:var(--ci);color:var(--dark);border-color:var(--ci);font-weight:600;}
 .admin-tab:hover:not(.active){background:var(--bg);}
 .stats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:1.5rem;}
-.stat-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:14px 16px;cursor:pointer;transition:border-color .15s,background .15s;}
-.stat-card:hover{border-color:var(--ci-main);background:var(--ci-main-light);}
-.stat-label{font-size:10px;color:var(--text-s);margin-bottom:6px;text-transform:uppercase;letter-spacing:0.5px;}
-.stat-num{font-size:26px;font-weight:700;color:var(--text);}
-.stat-hint{font-size:10px;color:var(--text-t);margin-top:4px;}
+.stat-card{background:var(--sur);border:1px solid var(--bdr);border-radius:var(--rl);padding:14px 16px;cursor:pointer;transition:border-color .15s,background .15s;}
+.stat-card:hover{border-color:var(--ci);background:var(--cil);}
+.stat-label{font-size:10px;color:var(--txs);margin-bottom:6px;text-transform:uppercase;letter-spacing:0.5px;}
+.stat-num{font-size:26px;font-weight:700;color:var(--tx);}
+.stat-hint{font-size:10px;color:var(--txt);margin-top:4px;}
 .activity-list{display:flex;flex-direction:column;gap:6px;}
-.activity-item{display:flex;align-items:flex-start;gap:10px;padding:10px 13px;background:var(--surface);border-radius:var(--radius);border:1px solid transparent;}
-.activity-item.clickable{cursor:pointer;}
-.activity-item.clickable:hover{border-color:var(--ci-main);background:var(--ci-main-light);}
-.activity-dot{width:7px;height:7px;border-radius:50%;background:var(--ci-main);flex-shrink:0;margin-top:5px;}
-.activity-text{font-size:12px;color:var(--text);flex:1;line-height:1.5;}
-.activity-time{font-size:10px;color:var(--text-t);flex-shrink:0;}
-.activity-arrow{font-size:11px;color:var(--text-t);flex-shrink:0;margin-top:3px;}
+.act-item{display:flex;align-items:flex-start;gap:10px;padding:10px 13px;background:var(--sur);border-radius:var(--r);border:1px solid transparent;}
+.act-item.clickable{cursor:pointer;}
+.act-item.clickable:hover{border-color:var(--ci);background:var(--cil);}
+.act-dot{width:7px;height:7px;border-radius:50%;background:var(--ci);flex-shrink:0;margin-top:5px;}
+.act-text{font-size:12px;color:var(--tx);flex:1;line-height:1.5;}
+.act-time{font-size:10px;color:var(--txt);flex-shrink:0;}
+.act-arrow{font-size:11px;color:var(--txt);flex-shrink:0;margin-top:3px;}
 .user-table{width:100%;border-collapse:collapse;}
-.user-table th{font-size:10px;text-transform:uppercase;letter-spacing:0.6px;color:var(--text-s);padding:8px 10px;text-align:left;border-bottom:1px solid var(--border);}
-.user-table td{font-size:12px;padding:12px 10px;border-bottom:1px solid var(--border);vertical-align:middle;}
+.user-table th{font-size:10px;text-transform:uppercase;letter-spacing:0.6px;color:var(--txs);padding:8px 10px;text-align:left;border-bottom:1px solid var(--bdr);}
+.user-table td{font-size:12px;padding:12px 10px;border-bottom:1px solid var(--bdr);vertical-align:middle;}
 .user-table tr:last-child td{border-bottom:none;}
 .user-row:hover td{background:var(--bg);}
-.u-name{font-weight:600;color:var(--text);}
-.u-email{color:var(--text-s);font-size:11px;margin-top:1px;}
-.level-select{font-size:12px;border:1px solid var(--border);border-radius:var(--radius);padding:4px 8px;background:#fff;color:var(--text);cursor:pointer;outline:none;}
-.level-select:focus{border-color:var(--ci-main);}
-.del-user-btn{padding:4px 10px;border-radius:var(--radius);border:1px solid #f5c6c6;background:transparent;color:#c0392b;font-size:11px;cursor:pointer;}
+.u-name{font-weight:600;color:var(--tx);}
+.u-email{color:var(--txs);font-size:11px;margin-top:1px;}
+.lvl-sel{font-size:12px;border:1px solid var(--bdr);border-radius:var(--r);padding:4px 8px;background:#fff;color:var(--tx);cursor:pointer;outline:none;}
+.lvl-sel:focus{border-color:var(--ci);}
+.del-user-btn{padding:4px 10px;border-radius:var(--r);border:1px solid #f5c6c6;background:transparent;color:#c0392b;font-size:11px;cursor:pointer;}
 .del-user-btn:hover{background:#fff5f5;}
-.add-user-row{display:flex;gap:8px;align-items:center;margin-top:14px;padding-top:14px;border-top:1px solid var(--border);}
-.add-user-row input,.add-user-row select{font-size:12px;border:1px solid var(--border);border-radius:var(--radius);padding:7px 10px;background:#fff;color:var(--text);outline:none;}
+.add-user-row{display:flex;gap:8px;align-items:center;margin-top:14px;padding-top:14px;border-top:1px solid var(--bdr);}
+.add-user-row input,.add-user-row select{font-size:12px;border:1px solid var(--bdr);border-radius:var(--r);padding:7px 10px;background:#fff;color:var(--tx);outline:none;}
 .add-user-row input{flex:1;}
-.add-user-btn{padding:7px 14px;border-radius:var(--radius);border:none;background:var(--ci-main);color:var(--ci-dark);font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap;}
+.add-user-btn{padding:7px 14px;border-radius:var(--r);border:none;background:var(--ci);color:var(--dark);font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap;}
 .all-articles-list{display:flex;flex-direction:column;gap:8px;}
-.all-article-item{display:flex;align-items:flex-start;gap:10px;padding:12px 15px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);cursor:pointer;}
-.all-article-item:hover{border-color:var(--ci-main);}
-.aai-title{font-size:13px;font-weight:500;color:var(--text);margin-bottom:3px;}
-.aai-meta{font-size:11px;color:var(--text-s);}
-
-/* MODALS */
+.aai{display:flex;align-items:flex-start;gap:10px;padding:12px 15px;background:var(--sur);border:1px solid var(--bdr);border-radius:var(--rl);cursor:pointer;}
+.aai:hover{border-color:var(--ci);}
+.aai-title{font-size:13px;font-weight:500;color:var(--tx);margin-bottom:3px;}
+.aai-meta{font-size:11px;color:var(--txs);}
+.sheet-status{font-size:11px;padding:8px 14px;border-radius:var(--r);margin:10px 0;display:none;}
+.ss-ok{background:#d1fae5;color:#065f46;display:block;}
+.ss-err{background:#fee2e2;color:#991b1b;display:block;}
+.ss-load{background:var(--cil);color:var(--dark);display:block;}
 .modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.3);z-index:500;align-items:flex-start;justify-content:center;padding:2rem 1rem;overflow-y:auto;}
 .modal-overlay.open{display:flex;}
-.modal{background:#fff;border-radius:var(--radius-lg);border:1px solid var(--border);padding:1.75rem;width:100%;max-width:460px;margin:auto;box-shadow:0 8px 40px rgba(0,0,0,0.12);}
+.modal{background:#fff;border-radius:var(--rl);border:1px solid var(--bdr);padding:1.75rem;width:100%;max-width:460px;margin:auto;box-shadow:0 8px 40px rgba(0,0,0,0.12);}
+.modal-sm{max-width:360px;}
 .modal-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:1.25rem;}
-.modal-title{font-size:15px;font-weight:600;color:var(--text);}
-.modal-close{background:none;border:none;font-size:20px;cursor:pointer;color:var(--text-s);line-height:1;}
-.modal label{font-size:11px;color:var(--text-s);display:block;margin-bottom:4px;margin-top:12px;text-transform:uppercase;letter-spacing:0.5px;}
-.modal input,.modal select,.modal textarea{width:100%;font-size:13px;border:1px solid var(--border);border-radius:var(--radius);padding:8px 10px;background:#fff;color:var(--text);outline:none;}
-.modal input:focus,.modal select:focus,.modal textarea:focus{border-color:var(--ci-main);}
+.modal-title{font-size:15px;font-weight:600;color:var(--tx);}
+.modal-close{background:none;border:none;font-size:20px;cursor:pointer;color:var(--txs);}
+.modal label{font-size:11px;color:var(--txs);display:block;margin-bottom:4px;margin-top:12px;text-transform:uppercase;letter-spacing:0.5px;}
+.modal input,.modal select,.modal textarea{width:100%;font-size:13px;border:1px solid var(--bdr);border-radius:var(--r);padding:8px 10px;background:#fff;color:var(--tx);outline:none;}
+.modal input:focus,.modal select:focus,.modal textarea:focus{border-color:var(--ci);}
 .modal textarea{resize:vertical;min-height:90px;line-height:1.6;}
 .modal-actions{display:flex;gap:8px;justify-content:flex-end;margin-top:16px;}
-.btn-cancel{padding:7px 15px;border-radius:var(--radius);border:1px solid var(--border);background:transparent;color:var(--text-s);font-size:13px;cursor:pointer;}
-.btn-save{padding:7px 17px;border-radius:var(--radius);border:none;background:var(--ci-main);color:var(--ci-dark);font-size:13px;cursor:pointer;font-weight:600;}
-.btn-del-confirm{padding:7px 17px;border-radius:var(--radius);border:none;background:#e74c3c;color:#fff;font-size:13px;cursor:pointer;font-weight:600;}
-.name-edit-input{font-size:15px;font-weight:600;border:1px solid var(--ci-main);border-radius:var(--radius);padding:3px 9px;color:var(--text);background:#fff;outline:none;width:150px;}
-.empty{text-align:center;padding:2.5rem;color:var(--text-t);font-size:13px;}
-
-@media(max-width:600px){
-  .cat-grid{grid-template-columns:1fr 1fr;}
-  .topic-grid{grid-template-columns:1fr;}
-  .article-layout{flex-direction:column;}
-  .sidebar{width:100%;position:static;}
-  .stats-grid{grid-template-columns:1fr 1fr;}
-}
+.btn-c{padding:7px 15px;border-radius:var(--r);border:1px solid var(--bdr);background:transparent;color:var(--txs);font-size:13px;cursor:pointer;}
+.btn-s{padding:7px 17px;border-radius:var(--r);border:none;background:var(--ci);color:var(--dark);font-size:13px;cursor:pointer;font-weight:600;}
+.btn-d{padding:7px 17px;border-radius:var(--r);border:none;background:#e74c3c;color:#fff;font-size:13px;cursor:pointer;font-weight:600;}
+.login-modal-hdr{background:var(--dark);margin:-1.75rem -1.75rem 1.5rem;padding:1.5rem 1.75rem;border-radius:var(--rl) var(--rl) 0 0;text-align:center;}
+.login-mark{width:44px;height:44px;background:var(--ci);border-radius:var(--r);display:inline-flex;align-items:center;justify-content:center;color:var(--dark);font-size:18px;font-weight:700;margin-bottom:8px;}
+.login-modal-hdr h2{font-size:15px;font-weight:600;color:#fff;margin-bottom:3px;}
+.login-modal-hdr p{font-size:11px;color:rgba(255,255,255,0.45);}
+.login-btn-full{width:100%;padding:10px;border-radius:var(--r);border:none;background:var(--ci);color:var(--dark);font-size:13px;font-weight:600;cursor:pointer;margin-top:4px;}
+.login-hint{font-size:10px;color:var(--txt);text-align:center;margin-top:10px;line-height:1.7;}
+.login-err{font-size:11px;color:#c0392b;text-align:center;margin-top:6px;display:none;}
+.empty{text-align:center;padding:2.5rem;color:var(--txt);font-size:13px;}
+@media(max-width:600px){.cat-grid{grid-template-columns:1fr 1fr;}.topic-grid{grid-template-columns:1fr;}.article-layout{flex-direction:column;}.sidebar{width:100%;position:static;}.stats-grid{grid-template-columns:1fr 1fr;}}
 </style>
 </head>
 <body>
 
-<!-- LOGIN -->
-<div class="login-screen" id="loginScreen">
-  <div class="login-card">
-    <div class="login-header">
+<div class="topbar">
+  <div class="topbar-inner">
+    <button class="home-btn" onclick="goHome()">⌂ Home</button>
+    <div class="search-wrap">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color:#9e9b96;flex-shrink:0;"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      <input type="text" id="searchInput" placeholder="ค้นหา insight, client, KOL..." oninput="onSearch(this.value)" />
+    </div>
+    <div class="top-actions">
+      <button class="add-btn" onclick="requireLogin(openAddModal,'กรุณาเข้าสู่ระบบก่อนเพิ่ม Insight')">+ เพิ่ม Insight</button>
+      <button class="admin-btn" id="adminNavBtn" onclick="showAdmin()">⚙ Admin</button>
+      <button class="login-topbtn" id="loginTopBtn" onclick="openLoginModal('เข้าสู่ระบบ')">เข้าสู่ระบบ</button>
+      <div class="avatar-btn" id="topAvatar" onclick="showProfile()" style="display:none;"></div>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+  <div id="sheetStatus" class="sheet-status"></div>
+
+  <div class="page active" id="pageHome">
+    <div class="hero"><div class="hero-sub">ยินดีต้อนรับสู่</div><div class="hero-title">BBD <span class="hero-acc">Insight Bank</span></div></div>
+    <div class="slabel">หมวดหมู่ทั้งหมด</div>
+    <div class="cat-grid" id="catGrid"></div>
+  </div>
+
+  <div class="page" id="pageSearch">
+    <div class="breadcrumb"><span class="bc-item" onclick="goHome()">Home</span><span class="bc-sep">›</span><span class="bc-cur">ค้นหา</span></div>
+    <div class="slabel" id="searchLabel"></div>
+    <div class="result-list" id="searchResults"></div>
+  </div>
+
+  <div class="page" id="pageCat">
+    <div class="breadcrumb"><span class="bc-item" onclick="goHome()">Home</span><span class="bc-sep">›</span><span class="bc-cur" id="catBC"></span></div>
+    <div class="hero"><div class="hero-sub">หมวดหมู่</div><div class="hero-title" id="catHeroTitle"></div></div>
+    <div class="topic-grid" id="topicGrid"></div>
+  </div>
+
+  <div class="page" id="pageArticle">
+    <div class="breadcrumb" id="articleBC"></div>
+    <div class="article-layout">
+      <div class="sidebar"><div class="sb-title">บทความในหมวดนี้</div><div id="sidebarList"></div></div>
+      <div style="flex:1;min-width:0;">
+        <div class="art-card" id="articleBody"></div>
+        <div id="commentsArea"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="page" id="pageProfile">
+    <div class="breadcrumb"><span class="bc-item" onclick="goHome()">Home</span><span class="bc-sep">›</span><span class="bc-cur">โปรไฟล์</span></div>
+    <div class="profile-card">
+      <div class="p-av" id="profileAv" onclick="triggerAvatarUpload()"><div class="p-av-ov">เปลี่ยนรูป</div></div>
+      <input type="file" id="avatarInput" accept="image/*" style="display:none" onchange="handleAvatar(event)" />
+      <div style="flex:1;"><div style="display:flex;align-items:center;flex-wrap:wrap;" id="profileNameRow"></div><div class="p-email" id="profileEmail"></div><div class="p-stats" id="profileStats"></div></div>
+      <button class="logout-btn" onclick="doLogout()">ออกจากระบบ</button>
+    </div>
+    <div class="slabel">บทความที่เขียน</div>
+    <div id="profileArticles"></div>
+  </div>
+
+  <div class="page" id="pageAdmin">
+    <div class="breadcrumb"><span class="bc-item" onclick="goHome()">Home</span><span class="bc-sep">›</span><span class="bc-cur">Admin Panel</span></div>
+    <div class="admin-banner"><div><h2>Admin Panel</h2><p>จัดการ users, สิทธิ์, และดู activity</p></div><div class="admin-banner-r">BBD Internal</div></div>
+    <div class="admin-tabs">
+      <button class="admin-tab active" onclick="switchAdminTab('users',this)">จัดการ Users</button>
+      <button class="admin-tab" onclick="switchAdminTab('stats',this)">Dashboard</button>
+    </div>
+    <div id="adminTabUsers"></div>
+    <div id="adminTabStats" style="display:none;"></div>
+  </div>
+
+  <div class="page" id="pageAllArticles">
+    <div class="breadcrumb"><span class="bc-item" onclick="goHome()">Home</span><span class="bc-sep">›</span><span class="bc-item" onclick="showAdmin()">Admin</span><span class="bc-sep">›</span><span class="bc-cur" id="allArtLabel"></span></div>
+    <div class="slabel" id="allArtSlabel"></div>
+    <div class="all-articles-list" id="allArtList"></div>
+  </div>
+</div>
+
+<!-- MODAL LOGIN -->
+<div class="modal-overlay" id="modalLogin">
+  <div class="modal modal-sm">
+    <div class="login-modal-hdr">
       <div class="login-mark">B</div>
-      <h1>BBD Insight Bank</h1>
+      <h2>BBD Insight Bank</h2>
       <p>เข้าสู่ระบบด้วย account บริษัทเท่านั้น</p>
     </div>
-    <div class="login-body">
-      <div class="field"><label>Email</label><input type="email" id="loginEmail" placeholder="yourname@bbd.co.th" /></div>
-      <div class="field"><label>Password</label><input type="password" id="loginPass" placeholder="••••••••" onkeydown="if(event.key==='Enter')doLogin()" /></div>
-      <button class="login-btn" onclick="doLogin()">เข้าสู่ระบบ</button>
-      <div class="login-hint">
-        ใช้ได้เฉพาะ @bbd.co.th เท่านั้น<br>
-        <strong>Admin:</strong> long@bbd.co.th / 1234 &nbsp;|&nbsp; <strong>Editor:</strong> ploy@bbd.co.th / 1234
-      </div>
-      <div class="login-err" id="loginErr">Email หรือ Password ไม่ถูกต้อง หรือไม่ใช่ account บริษัท</div>
-    </div>
+    <div id="loginModalMsg" style="font-size:12px;color:var(--txs);margin-bottom:12px;padding:8px 10px;background:var(--cil);border-radius:var(--r);display:none;"></div>
+    <label>Email</label><input type="email" id="loginEmail" placeholder="yourname@bakebread.digital" />
+    <label>Password</label><input type="password" id="loginPass" placeholder="••••••••" onkeydown="if(event.key==='Enter')doLogin()" />
+    <button class="login-btn-full" onclick="doLogin()">เข้าสู่ระบบ</button>
+    <div class="login-hint">ใช้ได้เฉพาะ @bakebread.digital เท่านั้น/div>
+    <div class="login-err" id="loginErr">Email หรือ Password ไม่ถูกต้อง</div>
+    <div class="modal-actions"><button class="btn-c" onclick="closeModal('modalLogin')">ปิด</button></div>
   </div>
 </div>
 
-<!-- APP -->
-<div class="app-shell" id="appShell">
-  <div class="topbar">
-    <div class="topbar-inner">
-      <button class="home-btn" onclick="goHome()">⌂ Home</button>
-      <div class="search-wrap">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color:#9e9b96;flex-shrink:0;"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-        <input type="text" id="searchInput" placeholder="ค้นหา insight, client, KOL, platform..." oninput="onSearch(this.value)" />
-      </div>
-      <div class="top-actions">
-        <button class="add-btn" onclick="openAddModal()">+ เพิ่ม Insight</button>
-        <button class="admin-btn" id="adminNavBtn" onclick="showAdmin()" style="display:none;">⚙ Admin</button>
-        <div class="avatar-btn" id="topAvatar" onclick="showProfile()" title="โปรไฟล์"></div>
-      </div>
-    </div>
-  </div>
-
-  <div class="wrap">
-    <!-- HOME -->
-    <div class="page active" id="pageHome">
-      <div class="hero">
-        <div class="hero-sub">สวัสดีครับ!</div>
-        <div class="hero-title">BBD <span class="hero-accent">Insight Bank</span></div>
-      </div>
-      <div class="section-label">หมวดหมู่ทั้งหมด</div>
-      <div class="cat-grid" id="catGrid"></div>
-    </div>
-
-    <!-- SEARCH -->
-    <div class="page" id="pageSearch">
-      <div class="breadcrumb"><span class="bc-item" onclick="goHome()">Home</span><span class="bc-sep">›</span><span class="bc-current">ค้นหา</span></div>
-      <div class="section-label" id="searchLabel"></div>
-      <div class="result-list" id="searchResults"></div>
-    </div>
-
-    <!-- CATEGORY -->
-    <div class="page" id="pageCat">
-      <div class="breadcrumb"><span class="bc-item" onclick="goHome()">Home</span><span class="bc-sep">›</span><span class="bc-current" id="catBC"></span></div>
-      <div class="hero"><div class="hero-sub">หมวดหมู่</div><div class="hero-title" id="catHeroTitle"></div></div>
-      <div class="topic-grid" id="topicGrid"></div>
-    </div>
-
-    <!-- ARTICLE -->
-    <div class="page" id="pageArticle">
-      <div class="breadcrumb" id="articleBC"></div>
-      <div class="article-layout">
-        <div class="sidebar"><div class="sidebar-title">บทความในหมวดนี้</div><div id="sidebarList"></div></div>
-        <div style="flex:1;min-width:0;">
-          <div class="article-card" id="articleBody"></div>
-          <div id="commentsArea"></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- PROFILE -->
-    <div class="page" id="pageProfile">
-      <div class="breadcrumb"><span class="bc-item" onclick="goHome()">Home</span><span class="bc-sep">›</span><span class="bc-current">โปรไฟล์</span></div>
-      <div class="profile-card">
-        <div class="profile-av" id="profileAv" onclick="triggerAvatarUpload()"><div class="profile-av-overlay">เปลี่ยนรูป</div></div>
-        <input type="file" id="avatarInput" accept="image/*" style="display:none" onchange="handleAvatar(event)" />
-        <div style="flex:1;">
-          <div style="display:flex;align-items:center;flex-wrap:wrap;" id="profileNameRow"></div>
-          <div class="profile-email" id="profileEmail"></div>
-          <div class="profile-stats" id="profileStats"></div>
-        </div>
-        <button class="logout-btn" onclick="doLogout()">ออกจากระบบ</button>
-      </div>
-      <div class="section-label">บทความที่เขียน</div>
-      <div id="profileArticles"></div>
-    </div>
-
-    <!-- ADMIN -->
-    <div class="page" id="pageAdmin">
-      <div class="breadcrumb"><span class="bc-item" onclick="goHome()">Home</span><span class="bc-sep">›</span><span class="bc-current">Admin Panel</span></div>
-      <div class="admin-banner">
-        <div><h2>Admin Panel</h2><p>จัดการ users, สิทธิ์, และดู activity</p></div>
-        <div class="admin-banner-right">BBD Internal</div>
-      </div>
-      <div class="admin-tabs">
-        <button class="admin-tab active" onclick="switchAdminTab('users',this)">จัดการ Users</button>
-        <button class="admin-tab" onclick="switchAdminTab('stats',this)">Dashboard</button>
-      </div>
-      <div id="adminTabUsers"></div>
-      <div id="adminTabStats" style="display:none;"></div>
-    </div>
-
-    <!-- ALL ARTICLES (admin drill-down) -->
-    <div class="page" id="pageAllArticles">
-      <div class="breadcrumb"><span class="bc-item" onclick="goHome()">Home</span><span class="bc-sep">›</span><span class="bc-item" onclick="showAdmin()">Admin</span><span class="bc-sep">›</span><span class="bc-current" id="allArticlesLabel"></span></div>
-      <div class="section-label" id="allArticlesSectionLabel"></div>
-      <div class="all-articles-list" id="allArticlesList"></div>
-    </div>
-  </div>
-</div>
-
-<!-- MODAL: ADD/EDIT -->
+<!-- MODAL FORM -->
 <div class="modal-overlay" id="modalForm">
   <div class="modal">
     <div class="modal-head"><div class="modal-title" id="modalFormTitle">เพิ่ม Insight ใหม่</div><button class="modal-close" onclick="closeModal('modalForm')">×</button></div>
     <label>ประเภท</label><select id="fType"><option value="camp">Campaign Learnings</option><option value="formula">Content Formula</option><option value="kol">KOL Notes</option></select>
     <label>หัวข้อ</label><input type="text" id="fTitle" placeholder="เช่น Tineco Q1 — Reels Hook Test" />
-    <label>กลุ่มย่อย (Sub-category)</label><input type="text" id="fSub" placeholder="เช่น Hook & Format, Performance" />
-    <label>Insight หลัก</label><textarea id="fBody" placeholder="สิ่งที่เรียนรู้, สิ่งที่ work / ไม่ work..."></textarea>
-    <label>Tags (คั่นด้วย ,)</label><input type="text" id="fTags" placeholder="เช่น Reels, Tineco, Hook" />
+    <label>กลุ่มย่อย</label><input type="text" id="fSub" placeholder="เช่น Hook & Format" />
+    <label>Insight หลัก</label><textarea id="fBody" placeholder="สิ่งที่เรียนรู้..."></textarea>
+    <label>Tags (คั่นด้วย ,)</label><input type="text" id="fTags" placeholder="เช่น Reels, Tineco" />
     <label>Client</label><input type="text" id="fClient" placeholder="เช่น Tineco TH" />
     <label>Platform</label><input type="text" id="fPlatform" placeholder="เช่น Instagram, TikTok" />
-    <div class="modal-actions"><button class="btn-cancel" onclick="closeModal('modalForm')">ยกเลิก</button><button class="btn-save" onclick="saveInsight()">บันทึก</button></div>
+    <div class="modal-actions"><button class="btn-c" onclick="closeModal('modalForm')">ยกเลิก</button><button class="btn-s" onclick="saveInsight()">บันทึก</button></div>
   </div>
 </div>
 
-<!-- MODAL: DELETE -->
+<!-- MODAL DELETE -->
 <div class="modal-overlay" id="modalDel">
-  <div class="modal" style="max-width:360px;">
+  <div class="modal modal-sm">
     <div class="modal-head"><div class="modal-title">ยืนยันการลบ</div><button class="modal-close" onclick="closeModal('modalDel')">×</button></div>
-    <p style="font-size:13px;color:#6b6966;line-height:1.7;" id="delModalText"></p>
-    <div class="modal-actions"><button class="btn-cancel" onclick="closeModal('modalDel')">ยกเลิก</button><button class="btn-del-confirm" id="delConfirmBtn">ลบ</button></div>
+    <p style="font-size:13px;color:var(--txs);line-height:1.7;" id="delModalText"></p>
+    <div class="modal-actions"><button class="btn-c" onclick="closeModal('modalDel')">ยกเลิก</button><button class="btn-d" id="delConfirmBtn">ลบ</button></div>
   </div>
 </div>
 
 <script>
-const MONTH=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-function today(){const d=new Date();return `${MONTH[d.getMonth()]} ${d.getFullYear()}`;}
+/* ================================================================
+   GOOGLE SHEETS CONFIG
+   ================================================================
+   วิธี setup Google Sheets:
 
-/* =============================================
-   DATA — แก้ตรงนี้เพื่อเพิ่ม users จริง
-   role: 'admin' | 'editor' | 'viewer'
-   ============================================= */
-let USERS={
-  'long@bbd.co.th':{pass:'1234',name:'Long',role:'admin'},
-  'ploy@bbd.co.th':{pass:'1234',name:'Ploy',role:'editor'},
-  'beam@bbd.co.th':{pass:'1234',name:'Beam',role:'viewer'},
+   STEP 1 — สร้าง Google Sheet ชื่อ "BBD-Insight-Bank"
+   สร้าง sheet ชื่อ "articles" มี column ตามนี้:
+   A:id | B:type | C:sub | D:title | E:body | F:tags | G:client | H:platform | I:date | J:author | K:comments
+
+   STEP 2 — Publish sheet เพื่อ read
+   File → Share → Publish to web → Sheet "articles" → CSV → Publish
+   Copy Sheet ID จาก URL: docs.google.com/spreadsheets/d/[SHEET_ID]/edit
+
+   STEP 3 — สร้าง Apps Script สำหรับ write
+   Extensions → Apps Script → วาง code นี้:
+
+   function doPost(e) {
+     const data = JSON.parse(e.postData.contents);
+     const ss = SpreadsheetApp.openById('YOUR_SHEET_ID');
+     const sheet = ss.getSheetByName('articles');
+     if(data.action === 'create') {
+       sheet.appendRow([data.data.id,data.data.type,data.data.sub,data.data.title,
+         data.data.body,data.data.tags.join(','),data.data.client,data.data.platform,
+         data.data.date,data.data.author,JSON.stringify(data.data.comments)]);
+     }
+     return ContentService.createTextOutput('ok');
+   }
+
+   Deploy → New deployment → Web app → Execute as: Me → Who has access: Anyone
+   Copy URL → ใส่ใน APPS_SCRIPT_URL ด้านล่าง
+   ================================================================ */
+
+const SHEET_ID = 'YOUR_SHEET_ID_HERE';
+const APPS_SCRIPT_URL = 'YOUR_APPS_SCRIPT_URL_HERE';
+const USE_SHEETS = SHEET_ID !== 'YOUR_SHEET_ID_HERE';
+
+/* ================================================================
+   USERS — @bakebread.digital
+   ================================================================ */
+let USERS = {
+  'long@bakebread.digital':  {pass:'1234', name:'Long',  role:'admin'},
+  'ploy@bakebread.digital':  {pass:'1234', name:'Ploy',  role:'editor'},
+  'beam@bakebread.digital':  {pass:'1234', name:'Beam',  role:'viewer'},
 };
 
-const CATS={
-  camp:{label:'Campaign Learnings',icon:'📊'},
-  formula:{label:'Content Formula',icon:'📋'},
-  kol:{label:'KOL Notes',icon:'👤'},
+const CATS = {
+  camp:    {label:'Campaign Learnings', icon:'📊'},
+  formula: {label:'Content Formula',   icon:'📋'},
+  kol:     {label:'KOL Notes',         icon:'👤'},
 };
 
-let DB=[
-  {id:1,type:'camp',sub:'Hook & Format',title:'Tineco Q4 — Reels Hook Before/After',body:'Hook แบบ before/after ใน 3 วินาทีแรก ให้ Watch Rate สูงกว่า product showcase ถึง 40% ในกลุ่มแม่บ้าน 28–35 ปี ควร brief KOL ไม่ให้มีการพูดถึง brand ก่อน hook เสมอ',tags:['Reels','Hook','Watch Rate'],client:'Tineco TH',platform:'Instagram',date:'Mar 2025',author:'long@bbd.co.th',comments:[]},
-  {id:2,type:'camp',sub:'Performance',title:'xBloom TH — TikTok Founder Story Q1',body:'Video ที่ founder เล่าเรื่องเองให้ Share Rate สูงสุด ควร brief KOL ให้เล่าในสไตล์ "ค้นพบ" มากกว่า review ตรงๆ ผู้ชม relate ได้มากกว่าและ organic มากกว่า',tags:['TikTok','Storytelling','Founder'],client:'xBloom TH',platform:'TikTok',date:'Mar 2025',author:'ploy@bbd.co.th',comments:[{id:1,author:'long@bbd.co.th',text:'เห็นด้วย — brief แบบนี้ให้ผลชัดมากกับ niche product ลอง apply กับ Tineco ด้วยได้',date:'Apr 2025'}]},
-  {id:3,type:'formula',sub:'Carousel Format',title:'3-Slide Reveal สำหรับ Niche Product',body:'Slide 1 = pain point ชัดๆ ไม่บอก solution / Slide 2 = solution โดยไม่บอกชื่อ brand / Slide 3 = reveal + CTA — format นี้ให้ Save Rate สูงกว่า carousel ธรรมดา 2 เท่า เหมาะกับ niche product ที่ต้องการ educate ก่อน',tags:['Carousel','Niche','Save Rate'],client:'ทุก client',platform:'Instagram',date:'Feb 2025',author:'long@bbd.co.th',comments:[]},
-  {id:4,type:'formula',sub:'Hook Writing',title:'Hook 3 วินาที — Formula ที่ทดสอบแล้ว',body:'Formula ที่ work: [ปัญหา] + [คำถาม Rhetorical] เช่น "ทำไมบ้านยังไม่สะอาดทั้งที่กวาดทุกวัน?" อย่าเริ่มด้วย brand name หรือ product ตรงๆ เสมอ ให้ hook ด้วย pain point ก่อน',tags:['Hook','Formula','Video'],client:'ทุก client',platform:'TikTok / Reels',date:'Jan 2025',author:'beam@bbd.co.th',comments:[]},
-  {id:5,type:'kol',sub:'Nano Tier',title:'@mildnarak_xx — nano lifestyle',body:'Engagement จริงสูง (~8%) แต่ audience เป็น Gen Z อายุ 18–22 ไม่ match กับ Tineco target ควรจับคู่กับ brand Gen Z หรือ beauty แทน ราคา 3,500฿/โพสต์ delivery ดีตรงเวลา',tags:['Nano','GenZ','Lifestyle'],client:'—',platform:'TikTok',date:'Jan 2025',author:'long@bbd.co.th',comments:[]},
-  {id:6,type:'kol',sub:'Micro Tier',title:'@sunsusnack_fan — micro food creator',body:'Delivery ดีมาก ตรงเวลา script ยืดหยุ่น แต่ engagement drop หลัง collab ครั้งแรก ควร brief ให้ organic มากขึ้น ไม่ stiff เกินไป ราคา 8,000฿/โพสต์',tags:['Micro','Food','Sunsu'],client:'Sunsu',platform:'Instagram',date:'Feb 2025',author:'ploy@bbd.co.th',comments:[]},
+let DB = [
+  {id:1,type:'camp',sub:'Hook & Format',title:'Tineco Q4 — Reels Hook Before/After',body:'Hook แบบ before/after ใน 3 วินาทีแรก ให้ Watch Rate สูงกว่า product showcase ถึง 40% ในกลุ่มแม่บ้าน 28–35 ปี ควร brief KOL ไม่ให้มีการพูดถึง brand ก่อน hook เสมอ',tags:['Reels','Hook','Watch Rate'],client:'Tineco TH',platform:'Instagram',date:'Mar 2025',author:'long@bakebread.digital',comments:[]},
+  {id:2,type:'camp',sub:'Performance',title:'xBloom TH — TikTok Founder Story Q1',body:'Video ที่ founder เล่าเรื่องเองให้ Share Rate สูงสุด ควร brief KOL ให้เล่าในสไตล์ "ค้นพบ" มากกว่า review ตรงๆ',tags:['TikTok','Storytelling'],client:'xBloom TH',platform:'TikTok',date:'Mar 2025',author:'ploy@bakebread.digital',comments:[{id:1,author:'long@bakebread.digital',text:'เห็นด้วย — brief แบบนี้ให้ผลชัดมาก',date:'Apr 2025'}]},
+  {id:3,type:'formula',sub:'Carousel Format',title:'3-Slide Reveal สำหรับ Niche Product',body:'Slide 1 = pain point / Slide 2 = solution / Slide 3 = reveal + CTA — Save Rate สูงกว่า 2 เท่า',tags:['Carousel','Niche'],client:'ทุก client',platform:'Instagram',date:'Feb 2025',author:'long@bakebread.digital',comments:[]},
+  {id:4,type:'formula',sub:'Hook Writing',title:'Hook 3 วินาที — Formula ที่ทดสอบแล้ว',body:'[ปัญหา] + [คำถาม Rhetorical] เช่น "ทำไมบ้านยังไม่สะอาดทั้งที่กวาดทุกวัน?" อย่าเริ่มด้วย brand name',tags:['Hook','Formula'],client:'ทุก client',platform:'TikTok/Reels',date:'Jan 2025',author:'beam@bakebread.digital',comments:[]},
+  {id:5,type:'kol',sub:'Nano Tier',title:'@mildnarak_xx — nano lifestyle',body:'Engagement จริงสูง (~8%) แต่ audience Gen Z 18–22 ไม่ match กับ Tineco target ราคา 3,500฿/โพสต์',tags:['Nano','GenZ'],client:'—',platform:'TikTok',date:'Jan 2025',author:'long@bakebread.digital',comments:[]},
+  {id:6,type:'kol',sub:'Micro Tier',title:'@sunsusnack_fan — micro food creator',body:'Delivery ดีมาก แต่ engagement drop หลัง collab ครั้งแรก ควร brief ให้ organic มากขึ้น ราคา 8,000฿/โพสต์',tags:['Micro','Food'],client:'Sunsu',platform:'Instagram',date:'Feb 2025',author:'ploy@bakebread.digital',comments:[]},
 ];
 
-let PROFILES={
-  'long@bbd.co.th':{name:'Long',avatar:null},
-  'ploy@bbd.co.th':{name:'Ploy',avatar:null},
-  'beam@bbd.co.th':{name:'Beam',avatar:null},
+let PROFILES = {
+  'long@bakebread.digital': {name:'Long', avatar:null},
+  'ploy@bakebread.digital': {name:'Ploy', avatar:null},
+  'beam@bakebread.digital': {name:'Beam', avatar:null},
 };
 
-let ACTIVITY=[
+let ACTIVITY = [
   {text:'Long เพิ่ม insight "Tineco Q4 — Reels Hook Before/After"',time:'2 วันที่แล้ว',articleId:1},
   {text:'Ploy แก้ไข "xBloom TH — TikTok Founder Story Q1"',time:'3 วันที่แล้ว',articleId:2},
   {text:'Long comment บน "xBloom TH — TikTok Founder Story"',time:'4 วันที่แล้ว',articleId:2},
-  {text:'Beam เพิ่ม insight "Hook 3 วินาที — Formula"',time:'1 สัปดาห์ที่แล้ว',articleId:4},
 ];
 
-let currentUser=null,currentCat=null,editingId=null,deletingId=null,deletingType=null;
+let currentUser=null, editingId=null, deletingId=null, deletingType=null, pendingAction=null;
+const MONTH=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+function today(){const d=new Date();return `${MONTH[d.getMonth()]} ${d.getFullYear()}`;}
 
-function roleBadge(r){
-  const m={admin:'rb-admin',editor:'rb-editor',viewer:'rb-viewer'};
-  const l={admin:'Admin',editor:'Editor',viewer:'Viewer'};
-  return `<span class="role-badge ${m[r]}">${l[r]}</span>`;
+/* GOOGLE SHEETS */
+async function loadFromSheets(){
+  if(!USE_SHEETS) return;
+  const s=document.getElementById('sheetStatus');
+  s.className='sheet-status ss-load';s.textContent='กำลังโหลดข้อมูลจาก Google Sheets...';
+  try{
+    const url=`https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&sheet=articles`;
+    const res=await fetch(url);
+    const text=await res.text();
+    const json=JSON.parse(text.substring(47,text.length-2));
+    const rows=json.table.rows;
+    if(rows&&rows.length>0){
+      DB=rows.map(r=>({
+        id:Number(r.c[0]?.v||Date.now()),type:r.c[1]?.v||'camp',sub:r.c[2]?.v||'ทั่วไป',
+        title:r.c[3]?.v||'',body:r.c[4]?.v||'',
+        tags:(r.c[5]?.v||'').split(',').map(t=>t.trim()).filter(Boolean),
+        client:r.c[6]?.v||'—',platform:r.c[7]?.v||'—',date:r.c[8]?.v||today(),
+        author:r.c[9]?.v||'',comments:JSON.parse(r.c[10]?.v||'[]'),
+      }));
+      s.className='sheet-status ss-ok';
+      s.textContent=`✓ โหลดข้อมูลจาก Google Sheets สำเร็จ (${DB.length} บทความ)`;
+      setTimeout(()=>s.style.display='none',3000);
+      renderHome();
+    }
+  }catch(e){
+    s.className='sheet-status ss-err';
+    s.textContent='⚠ ไม่สามารถเชื่อมต่อ Google Sheets — ใช้ข้อมูลตัวอย่างแทน';
+    setTimeout(()=>s.style.display='none',5000);
+  }
 }
-function getAvatar(email,size=24){
-  const p=PROFILES[email];const u=USERS[email];
-  const name=p?p.name:(u?u.name:email.split('@')[0]);
-  if(p&&p.avatar)return `<img src="${p.avatar}" alt="${name}">`;
-  return `<span style="font-size:${Math.round(size*.38)}px;font-weight:600;color:#1B2630;">${name[0].toUpperCase()}</span>`;
+
+async function saveToSheets(action,data){
+  if(!USE_SHEETS||APPS_SCRIPT_URL==='YOUR_APPS_SCRIPT_URL_HERE')return;
+  try{await fetch(APPS_SCRIPT_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify({action,data})});}
+  catch(e){console.warn('Sheets write failed:',e);}
+}
+
+/* AUTH */
+function requireLogin(action,msg=''){
+  if(currentUser){action();return;}
+  pendingAction=action;
+  openLoginModal(msg||'กรุณาเข้าสู่ระบบ');
+}
+
+function openLoginModal(msg=''){
+  const msgEl=document.getElementById('loginModalMsg');
+  if(msg&&msg!=='เข้าสู่ระบบ'){msgEl.textContent='🔒 '+msg;msgEl.style.display='block';}
+  else{msgEl.style.display='none';}
+  document.getElementById('loginErr').style.display='none';
+  document.getElementById('loginEmail').value='';
+  document.getElementById('loginPass').value='';
+  document.getElementById('modalLogin').classList.add('open');
 }
 
 function doLogin(){
   const email=document.getElementById('loginEmail').value.trim().toLowerCase();
   const pass=document.getElementById('loginPass').value;
-  const err=document.getElementById('loginErr');
   const u=USERS[email];
-  if(!u||u.pass!==pass||!email.endsWith('@bbd.co.th')){err.style.display='block';return;}
-  err.style.display='none';
+  if(!u||u.pass!==pass||!email.endsWith('@bakebread.digital')){
+    document.getElementById('loginErr').style.display='block';return;
+  }
+  document.getElementById('loginErr').style.display='none';
   currentUser=email;
-  document.getElementById('loginScreen').style.display='none';
-  document.getElementById('appShell').classList.add('active');
-  document.getElementById('adminNavBtn').style.display=u.role==='admin'?'flex':'none';
-  renderTopAvatar();renderHome();showPage('pageHome');
+  closeModal('modalLogin');
+  renderTopNav();
+  if(pendingAction){const fn=pendingAction;pendingAction=null;fn();}
 }
-function doLogout(){
-  currentUser=null;
-  document.getElementById('loginScreen').style.display='flex';
-  document.getElementById('appShell').classList.remove('active');
-  document.getElementById('loginEmail').value='';
-  document.getElementById('loginPass').value='';
+
+function doLogout(){currentUser=null;pendingAction=null;renderTopNav();goHome();}
+
+function renderTopNav(){
+  const ok=!!currentUser;
+  const isAdmin=ok&&USERS[currentUser]?.role==='admin';
+  document.getElementById('loginTopBtn').style.display=ok?'none':'block';
+  document.getElementById('topAvatar').style.display=ok?'flex':'none';
+  document.getElementById('adminNavBtn').style.display=isAdmin?'flex':'none';
+  if(ok)document.getElementById('topAvatar').innerHTML=getAvatar(currentUser,32);
 }
-function renderTopAvatar(){
-  const el=document.getElementById('topAvatar');
-  el.innerHTML=getAvatar(currentUser,32);
-}
-function showPage(id){
-  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-}
+
+/* HELPERS */
+function roleBadge(r){const m={admin:'rb-admin',editor:'rb-editor',viewer:'rb-viewer'};const l={admin:'Admin',editor:'Editor',viewer:'Viewer'};return `<span class="rbadge ${m[r]}">${l[r]}</span>`;}
+function getAvatar(email,size=24){const p=PROFILES[email];const u=USERS[email];const name=p?.name||u?.name||email.split('@')[0];if(p?.avatar)return `<img src="${p.avatar}" alt="${name}">`;return `<span style="font-size:${Math.round(size*.38)}px;font-weight:600;color:#1B2630;">${name[0].toUpperCase()}</span>`;}
+function showPage(id){document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.getElementById(id).classList.add('active');}
 function goHome(){document.getElementById('searchInput').value='';renderHome();showPage('pageHome');}
+
+/* PAGES */
 function renderHome(){
   document.getElementById('catGrid').innerHTML=Object.entries(CATS).map(([k,c])=>{
     const n=DB.filter(d=>d.type===k).length;
-    return `<div class="cat-card" onclick="openCat('${k}')">
-      <div class="cat-icon">${c.icon}</div>
-      <div class="cat-label">${c.label}</div>
-      <div class="cat-count">${n} บทความ</div>
-    </div>`;
+    return `<div class="cat-card" onclick="openCat('${k}')"><div class="cat-icon">${c.icon}</div><div class="cat-label">${c.label}</div><div class="cat-count">${n} บทความ</div></div>`;
   }).join('');
 }
+
 function onSearch(q){
   if(!q.trim()){showPage('pageHome');return;}
   showPage('pageSearch');
   const r=DB.filter(d=>[d.title,d.body,...d.tags,d.client,d.sub].join(' ').toLowerCase().includes(q.toLowerCase()));
   document.getElementById('searchLabel').textContent=`พบ ${r.length} ผลลัพธ์สำหรับ "${q}"`;
   document.getElementById('searchResults').innerHTML=r.length
-    ?r.map(d=>`<div class="result-item" onclick="openArticle(${d.id})">
-        <div class="result-dot">◆</div>
-        <div><div class="result-title">${d.title}</div><div class="result-path">${CATS[d.type].label} › ${d.sub}</div></div>
-      </div>`).join('')
+    ?r.map(d=>`<div class="result-item" onclick="openArticle(${d.id})"><div class="rdot">◆</div><div><div class="rtitle">${d.title}</div><div class="rpath">${CATS[d.type].label} › ${d.sub}</div></div></div>`).join('')
     :'<div class="empty">ไม่พบ insight ที่ตรงกัน</div>';
 }
+
 function openCat(type){
-  currentCat=type;
   const c=CATS[type];
   document.getElementById('catBC').textContent=c.label;
   document.getElementById('catHeroTitle').textContent=c.label;
-  const items=DB.filter(d=>d.type===type);
   const groups={};
-  items.forEach(d=>{if(!groups[d.sub])groups[d.sub]=[];groups[d.sub].push(d);});
+  DB.filter(d=>d.type===type).forEach(d=>{if(!groups[d.sub])groups[d.sub]=[];groups[d.sub].push(d);});
   document.getElementById('topicGrid').innerHTML=Object.entries(groups).map(([sub,arts])=>`
-    <div class="topic-group">
-      <div class="tg-title">${sub}</div>
-      ${arts.map(a=>`<div class="tg-item" onclick="openArticle(${a.id})">
-        <div class="tg-dot">◆</div><div class="tg-name">${a.title}</div>
-      </div>`).join('')}
+    <div class="topic-group"><div class="tg-title">${sub}</div>
+    ${arts.map(a=>`<div class="tg-item" onclick="openArticle(${a.id})"><div class="tg-dot">◆</div><div class="tg-name">${a.title}</div></div>`).join('')}
     </div>`).join('');
   showPage('pageCat');
 }
+
 function openArticle(id){
   const art=DB.find(d=>d.id===id);
   const c=CATS[art.type];
-  const role=USERS[currentUser]?USERS[currentUser].role:'viewer';
-  const canEdit=art.author===currentUser||(role==='admin');
+  const role=currentUser?USERS[currentUser]?.role:null;
+  const canEdit=art.author===currentUser||role==='admin';
   const authorName=(PROFILES[art.author]||{name:art.author.split('@')[0]}).name;
   const siblings=DB.filter(d=>d.type===art.type);
+
   document.getElementById('articleBC').innerHTML=`
     <span class="bc-item" onclick="goHome()">Home</span><span class="bc-sep">›</span>
     <span class="bc-item" onclick="openCat('${art.type}')">${c.label}</span><span class="bc-sep">›</span>
-    <span class="bc-current">${art.sub}</span>`;
+    <span class="bc-cur">${art.sub}</span>`;
+
   document.getElementById('sidebarList').innerHTML=siblings.map(s=>`
-    <div class="sidebar-item ${s.id===id?'active':''}" onclick="openArticle(${s.id})">${s.title}</div>`).join('');
+    <div class="sb-item ${s.id===id?'active':''}" onclick="openArticle(${s.id})">${s.title}</div>`).join('');
+
   document.getElementById('articleBody').innerHTML=`
-    <span class="article-badge">${c.icon} ${c.label}</span>
-    <div class="article-title-row">
-      <div class="article-title">${art.title}</div>
-      ${canEdit?`<div class="article-actions">
-        <button class="action-btn" onclick="openEditModal(${id})">แก้ไข</button>
-        <button class="action-btn del" onclick="openDelModal(${id},'article')">ลบ</button>
-      </div>`:''}
+    <span class="art-badge">${c.icon} ${c.label}</span>
+    <div class="art-title-row">
+      <div class="art-title">${art.title}</div>
+      <div class="art-actions">
+        <button class="abtn" onclick="requireLogin(()=>exportArticle(${id}),'กรุณาเข้าสู่ระบบก่อน Export')">↓ Export</button>
+        ${canEdit?`<button class="abtn" onclick="openEditModal(${id})">แก้ไข</button><button class="abtn del" onclick="openDelModal(${id},'article')">ลบ</button>`:''}
+      </div>
     </div>
-    <div class="article-meta-row">
-      <div class="article-date">${art.date}</div>
+    <div class="art-meta-row">
+      <div class="art-date">${art.date}</div>
       <div class="author-chip"><div class="author-av">${getAvatar(art.author,18)}</div>${authorName}</div>
     </div>
-    <div class="article-content">${art.body}</div>
-    <div class="article-tags">${art.tags.map(t=>`<span class="a-tag">${t}</span>`).join('')}</div>
+    <div class="art-body">${art.body}</div>
+    <div class="art-tags">${art.tags.map(t=>`<span class="a-tag">${t}</span>`).join('')}</div>
     <div class="divider"></div>
-    <div class="meta-chips">
-      <span class="meta-chip">Client: <strong>${art.client}</strong></span>
-      <span class="meta-chip">Platform: <strong>${art.platform}</strong></span>
-    </div>`;
+    <div class="meta-chips"><span class="mc">Client: <strong>${art.client}</strong></span><span class="mc">Platform: <strong>${art.platform}</strong></span></div>`;
+
+  const cmtHtml=art.comments.map(cm=>{
+    const cn=(PROFILES[cm.author]||{name:cm.author.split('@')[0]}).name;
+    return `<div class="cmt-item"><div class="cmt-av">${getAvatar(cm.author,26)}</div>
+      <div class="cmt-bubble"><div class="cmt-author">${cn} <span style="font-weight:400;color:#9e9b96;font-size:10px;">${cm.date}</span></div>
+      <div class="cmt-text">${cm.text}</div></div></div>`;
+  }).join('');
+
+  const cmtAction=currentUser
+    ?`<div class="cmt-input-row"><textarea class="cmt-input" id="ci_${id}" rows="2" placeholder="เพิ่มความคิดเห็น..."></textarea><button class="cmt-send" onclick="addComment(${id})">ส่ง</button></div>`
+    :`<div class="login-prompt"><span>เข้าสู่ระบบเพื่อแสดงความคิดเห็น</span><button class="lp-btn" onclick="requireLogin(()=>openArticle(${id}),'กรุณาเข้าสู่ระบบก่อน comment')">เข้าสู่ระบบ</button></div>`;
+
   document.getElementById('commentsArea').innerHTML=`
-    <div class="comments-section">
-      <div class="comments-title">ความคิดเห็น (${art.comments.length})</div>
-      ${art.comments.map(cm=>{
-        const cn=(PROFILES[cm.author]||{name:cm.author.split('@')[0]}).name;
-        return `<div class="comment-item">
-          <div class="comment-av">${getAvatar(cm.author,26)}</div>
-          <div class="comment-bubble">
-            <div class="comment-author">${cn} <span style="font-weight:400;color:#9e9b96;font-size:10px;">${cm.date}</span></div>
-            <div class="comment-text">${cm.text}</div>
-          </div>
-        </div>`;
-      }).join('')}
-      <div class="comment-input-row">
-        <textarea class="comment-input" id="ci_${id}" rows="2" placeholder="เพิ่มความคิดเห็น..."></textarea>
-        <button class="comment-send" onclick="addComment(${id})">ส่ง</button>
-      </div>
-    </div>`;
+    <div class="cmt-section"><div class="cmt-title">ความคิดเห็น (${art.comments.length})</div>${cmtHtml}${cmtAction}</div>`;
+
   showPage('pageArticle');
 }
+
 function addComment(aid){
-  const inp=document.getElementById(`ci_${aid}`);
-  const text=inp.value.trim();if(!text)return;
+  const inp=document.getElementById(`ci_${aid}`);const text=inp.value.trim();if(!text)return;
   const art=DB.find(d=>d.id===aid);
-  art.comments.push({id:Date.now(),author:currentUser,text,date:today()});
-  ACTIVITY.unshift({text:`${PROFILES[currentUser].name} comment บน "${art.title}"`,time:'เมื่อกี้',articleId:aid});
+  const cmt={id:Date.now(),author:currentUser,text,date:today()};
+  art.comments.push(cmt);
+  ACTIVITY.unshift({text:`${PROFILES[currentUser]?.name} comment บน "${art.title}"`,time:'เมื่อกี้',articleId:aid});
+  saveToSheets('updateComments',{id:aid,comments:art.comments});
   openArticle(aid);
 }
-function showProfile(){renderProfile();showPage('pageProfile');}
+
+function exportArticle(id){
+  const art=DB.find(d=>d.id===id);
+  const win=window.open('','_blank');
+  if(!win){alert('กรุณาอนุญาต popup');return;}
+  win.document.write(`<html><head><title>${art.title}</title>
+    <style>body{font-family:sans-serif;max-width:700px;margin:2rem auto;padding:1rem;color:#1a1a1a;}h1{font-size:20px;}p{line-height:1.8;}small{color:#888;}</style></head>
+    <body><h1>${art.title}</h1><small>${CATS[art.type].label} · ${art.sub} · ${art.date}</small><hr>
+    <p>${art.body}</p><hr><small>Tags: ${art.tags.join(', ')} | Client: ${art.client} | Platform: ${art.platform}</small>
+    <script>window.print();<\/script></body></html>`);
+}
+
+/* PROFILE */
+function showProfile(){
+  if(!currentUser){requireLogin(showProfile,'กรุณาเข้าสู่ระบบเพื่อดูโปรไฟล์');return;}
+  renderProfile();showPage('pageProfile');
+}
 function renderProfile(){
   const p=PROFILES[currentUser]||{name:currentUser.split('@')[0],avatar:null};
-  const role=USERS[currentUser]?USERS[currentUser].role:'viewer';
+  const role=USERS[currentUser]?.role||'viewer';
   const myArts=DB.filter(d=>d.author===currentUser);
   const avEl=document.getElementById('profileAv');
-  avEl.innerHTML=p.avatar
-    ?`<img src="${p.avatar}" alt="${p.name}"><div class="profile-av-overlay">เปลี่ยนรูป</div>`
-    :`<span style="font-size:22px;font-weight:700;color:#1B2630;">${p.name[0].toUpperCase()}</span><div class="profile-av-overlay">เปลี่ยนรูป</div>`;
-  document.getElementById('profileNameRow').innerHTML=`
-    <span class="profile-name">${p.name}</span>${roleBadge(role)}
-    <button class="edit-name-btn" onclick="editName()">แก้ชื่อ</button>`;
+  avEl.innerHTML=p.avatar?`<img src="${p.avatar}"><div class="p-av-ov">เปลี่ยนรูป</div>`:`<span style="font-size:22px;font-weight:700;color:#1B2630;">${p.name[0].toUpperCase()}</span><div class="p-av-ov">เปลี่ยนรูป</div>`;
+  document.getElementById('profileNameRow').innerHTML=`<span class="p-name">${p.name}</span>${roleBadge(role)}<button class="edit-name-btn" onclick="editName()">แก้ชื่อ</button>`;
   document.getElementById('profileEmail').textContent=currentUser;
-  document.getElementById('profileStats').innerHTML=`
-    <span class="pstat">บทความ <strong>${myArts.length}</strong></span>
-    <span class="pstat">comments <strong>${DB.reduce((s,d)=>s+d.comments.filter(c=>c.author===currentUser).length,0)}</strong></span>`;
+  document.getElementById('profileStats').innerHTML=`<span class="pstat">บทความ <strong>${myArts.length}</strong></span><span class="pstat">comments <strong>${DB.reduce((s,d)=>s+d.comments.filter(c=>c.author===currentUser).length,0)}</strong></span>`;
   document.getElementById('profileArticles').innerHTML=myArts.length
-    ?myArts.map(a=>`<div class="profile-article-card" onclick="openArticle(${a.id})">
-        <div><div class="pac-title">${a.title}</div><div class="pac-meta">${CATS[a.type].label} · ${a.date}</div></div>
-        <div style="display:flex;gap:6px;flex-shrink:0;">
-          <button class="action-btn" onclick="event.stopPropagation();openEditModal(${a.id})">แก้ไข</button>
-          <button class="action-btn del" onclick="event.stopPropagation();openDelModal(${a.id},'article')">ลบ</button>
-        </div>
-      </div>`).join('')
-    :'<div class="empty">ยังไม่มีบทความที่เขียน</div>';
+    ?myArts.map(a=>`<div class="p-art-card" onclick="openArticle(${a.id})"><div><div class="pac-title">${a.title}</div><div class="pac-meta">${CATS[a.type].label} · ${a.date}</div></div><div style="display:flex;gap:6px;flex-shrink:0;"><button class="abtn" onclick="event.stopPropagation();openEditModal(${a.id})">แก้ไข</button><button class="abtn del" onclick="event.stopPropagation();openDelModal(${a.id},'article')">ลบ</button></div></div>`).join('')
+    :'<div class="empty">ยังไม่มีบทความ</div>';
 }
 function triggerAvatarUpload(){document.getElementById('avatarInput').click();}
-function handleAvatar(e){
-  const f=e.target.files[0];if(!f)return;
-  const r=new FileReader();
-  r.onload=ev=>{PROFILES[currentUser].avatar=ev.target.result;renderTopAvatar();renderProfile();};
-  r.readAsDataURL(f);
-}
-function editName(){
-  const p=PROFILES[currentUser];
-  document.getElementById('profileNameRow').innerHTML=`
-    <input class="name-edit-input" id="nameIn" value="${p.name}" maxlength="30">
-    <button class="btn-save" style="padding:5px 12px;font-size:12px;margin-left:8px;" onclick="saveName()">บันทึก</button>
-    <button class="btn-cancel" style="padding:5px 10px;font-size:12px;margin-left:4px;" onclick="renderProfile()">ยกเลิก</button>`;
-  document.getElementById('nameIn').focus();
-}
-function saveName(){
-  const v=document.getElementById('nameIn').value.trim();
-  if(!v)return;
-  PROFILES[currentUser].name=v;
-  renderTopAvatar();renderProfile();
-}
+function handleAvatar(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=ev=>{PROFILES[currentUser].avatar=ev.target.result;renderTopNav();renderProfile();};r.readAsDataURL(f);}
+function editName(){const p=PROFILES[currentUser];document.getElementById('profileNameRow').innerHTML=`<input class="name-edit-input" id="nameIn" value="${p.name}" maxlength="30"><button class="btn-s" style="padding:5px 12px;font-size:12px;margin-left:8px;" onclick="saveName()">บันทึก</button><button class="btn-c" style="padding:5px 10px;font-size:12px;margin-left:4px;" onclick="renderProfile()">ยกเลิก</button>`;document.getElementById('nameIn').focus();}
+function saveName(){const v=document.getElementById('nameIn').value.trim();if(!v)return;PROFILES[currentUser].name=v;renderTopNav();renderProfile();}
+
+/* ADMIN */
 function showAdmin(){
-  if(USERS[currentUser].role!=='admin')return;
-  renderAdminUsers();renderAdminStats();
-  showPage('pageAdmin');
+  if(!currentUser){requireLogin(showAdmin,'กรุณาเข้าสู่ระบบก่อนเข้า Admin Panel');return;}
+  if(USERS[currentUser]?.role!=='admin'){alert('ไม่มีสิทธิ์เข้าถึง');return;}
+  renderAdminUsers();renderAdminStats();showPage('pageAdmin');
 }
-function switchAdminTab(tab,el){
-  document.querySelectorAll('.admin-tab').forEach(t=>t.classList.remove('active'));
-  el.classList.add('active');
-  document.getElementById('adminTabUsers').style.display=tab==='users'?'block':'none';
-  document.getElementById('adminTabStats').style.display=tab==='stats'?'block':'none';
-}
+function switchAdminTab(tab,el){document.querySelectorAll('.admin-tab').forEach(t=>t.classList.remove('active'));el.classList.add('active');document.getElementById('adminTabUsers').style.display=tab==='users'?'block':'none';document.getElementById('adminTabStats').style.display=tab==='stats'?'block':'none';}
 function renderAdminUsers(){
   const rows=Object.entries(USERS).map(([email,u])=>{
-    const p=PROFILES[email]||{name:u.name};
-    const isSelf=email===currentUser;
-    const artCount=DB.filter(d=>d.author===email).length;
-    return `<tr class="user-row">
-      <td><div style="display:flex;align-items:center;gap:10px;">
-        <div class="avatar-btn" style="width:30px;height:30px;background:var(--ci-main-light);">${getAvatar(email,30)}</div>
-        <div><div class="u-name">${p.name}</div><div class="u-email">${email}</div></div>
-      </div></td>
-      <td><select class="level-select" onchange="changeRole('${email}',this.value)" ${isSelf?'disabled':''}>
-        <option value="admin" ${u.role==='admin'?'selected':''}>Admin</option>
-        <option value="editor" ${u.role==='editor'?'selected':''}>Editor</option>
-        <option value="viewer" ${u.role==='viewer'?'selected':''}>Viewer</option>
-      </select></td>
-      <td style="cursor:pointer;" onclick="showArticlesByUser('${email}')">${artCount} บทความ ›</td>
-      <td>${isSelf?`<span style="font-size:11px;color:#9e9b96;">คุณ</span>`:`<button class="del-user-btn" onclick="openDelModal('${email}','user')">ลบ</button>`}</td>
-    </tr>`;
+    const p=PROFILES[email]||{name:u.name};const isSelf=email===currentUser;const n=DB.filter(d=>d.author===email).length;
+    return `<tr class="user-row"><td><div style="display:flex;align-items:center;gap:10px;"><div class="avatar-btn" style="width:30px;height:30px;background:var(--cil);">${getAvatar(email,30)}</div><div><div class="u-name">${p.name}</div><div class="u-email">${email}</div></div></div></td>
+    <td><select class="lvl-sel" onchange="changeRole('${email}',this.value)" ${isSelf?'disabled':''}><option value="admin" ${u.role==='admin'?'selected':''}>Admin</option><option value="editor" ${u.role==='editor'?'selected':''}>Editor</option><option value="viewer" ${u.role==='viewer'?'selected':''}>Viewer</option></select></td>
+    <td style="cursor:pointer;" onclick="showArticlesByUser('${email}')">${n} บทความ ›</td>
+    <td>${isSelf?`<span style="font-size:11px;color:#9e9b96;">คุณ</span>`:`<button class="del-user-btn" onclick="openDelModal('${email}','user')">ลบ</button>`}</td></tr>`;
   }).join('');
-  document.getElementById('adminTabUsers').innerHTML=`
-    <table class="user-table">
-      <thead><tr><th>ผู้ใช้</th><th>ระดับสิทธิ์</th><th>บทความ</th><th>จัดการ</th></tr></thead>
-      <tbody>${rows}</tbody>
-    </table>
-    <div class="add-user-row">
-      <input type="email" id="newUserEmail" placeholder="email@bbd.co.th" />
-      <select id="newUserRole"><option value="viewer">Viewer</option><option value="editor">Editor</option><option value="admin">Admin</option></select>
-      <button class="add-user-btn" onclick="addUser()">+ เพิ่ม User</button>
-    </div>`;
+  document.getElementById('adminTabUsers').innerHTML=`<table class="user-table"><thead><tr><th>ผู้ใช้</th><th>ระดับสิทธิ์</th><th>บทความ</th><th>จัดการ</th></tr></thead><tbody>${rows}</tbody></table>
+    <div class="add-user-row"><input type="email" id="newUserEmail" placeholder="email@bakebread.digital" /><select id="newUserRole"><option value="viewer">Viewer</option><option value="editor">Editor</option><option value="admin">Admin</option></select><button class="add-user-btn" onclick="addUser()">+ เพิ่ม User</button></div>`;
 }
 function renderAdminStats(){
-  const totalC=DB.reduce((s,d)=>s+d.comments.length,0);
+  const tc=DB.reduce((s,d)=>s+d.comments.length,0);
   document.getElementById('adminTabStats').innerHTML=`
     <div class="stats-grid">
-      <div class="stat-card" onclick="showAllArticles('all')">
-        <div class="stat-label">บทความทั้งหมด</div>
-        <div class="stat-num">${DB.length}</div>
-        <div class="stat-hint">คลิกเพื่อดูทั้งหมด →</div>
-      </div>
-      <div class="stat-card" onclick="switchAdminTab('users',document.querySelectorAll('.admin-tab')[0])">
-        <div class="stat-label">Users</div>
-        <div class="stat-num">${Object.keys(USERS).length}</div>
-        <div class="stat-hint">คลิกเพื่อจัดการ →</div>
-      </div>
-      <div class="stat-card" onclick="showAllArticles('comments')">
-        <div class="stat-label">Comments</div>
-        <div class="stat-num">${totalC}</div>
-        <div class="stat-hint">คลิกดูบทความที่มี comment →</div>
-      </div>
+      <div class="stat-card" onclick="showAllArticles('all')"><div class="stat-label">บทความทั้งหมด</div><div class="stat-num">${DB.length}</div><div class="stat-hint">คลิกเพื่อดูทั้งหมด →</div></div>
+      <div class="stat-card" onclick="switchAdminTab('users',document.querySelectorAll('.admin-tab')[0])"><div class="stat-label">Users</div><div class="stat-num">${Object.keys(USERS).length}</div><div class="stat-hint">คลิกเพื่อจัดการ →</div></div>
+      <div class="stat-card" onclick="showAllArticles('comments')"><div class="stat-label">Comments</div><div class="stat-num">${tc}</div><div class="stat-hint">คลิกดูบทความที่มี comment →</div></div>
     </div>
-    <div class="section-label">Activity ล่าสุด</div>
-    <div class="activity-list">
-      ${ACTIVITY.slice(0,8).map(a=>{
-        const hasLink=a.articleId&&DB.find(d=>d.id===a.articleId);
-        return `<div class="activity-item ${hasLink?'clickable':''}" ${hasLink?`onclick="openArticle(${a.articleId})"`:''}>
-          <div class="activity-dot"></div>
-          <div class="activity-text">${a.text}</div>
-          <div class="activity-time">${a.time}</div>
-          ${hasLink?`<div class="activity-arrow">›</div>`:''}
-        </div>`;
-      }).join('')}
-    </div>`;
+    <div class="slabel">Activity ล่าสุด</div>
+    <div class="activity-list">${ACTIVITY.slice(0,8).map(a=>{const h=a.articleId&&DB.find(d=>d.id===a.articleId);return `<div class="act-item ${h?'clickable':''}" ${h?`onclick="openArticle(${a.articleId})"`:''}>
+      <div class="act-dot"></div><div class="act-text">${a.text}</div><div class="act-time">${a.time}</div>${h?`<div class="act-arrow">›</div>`:''}</div>`;}).join('')}</div>`;
 }
 function showAllArticles(mode){
-  let list=mode==='comments'?DB.filter(d=>d.comments.length>0):[...DB];
+  const list=mode==='comments'?DB.filter(d=>d.comments.length>0):[...DB];
   const label=mode==='comments'?`บทความที่มี comments (${list.length})`:`บทความทั้งหมด (${list.length})`;
-  document.getElementById('allArticlesLabel').textContent=label;
-  document.getElementById('allArticlesSectionLabel').textContent=label;
-  document.getElementById('allArticlesList').innerHTML=list.map(a=>`
-    <div class="all-article-item" onclick="openArticle(${a.id})">
-      <div class="result-dot">◆</div>
-      <div><div class="aai-title">${a.title}</div>
-      <div class="aai-meta">${CATS[a.type].label} · ${a.sub} · ${a.date}${a.comments.length>0?` · 💬 ${a.comments.length}`:''}</div></div>
-    </div>`).join('');
+  document.getElementById('allArtLabel').textContent=label;document.getElementById('allArtSlabel').textContent=label;
+  document.getElementById('allArtList').innerHTML=list.map(a=>`<div class="aai" onclick="openArticle(${a.id})"><div class="rdot">◆</div><div><div class="aai-title">${a.title}</div><div class="aai-meta">${CATS[a.type].label} · ${a.sub} · ${a.date}${a.comments.length?` · 💬 ${a.comments.length}`:''}</div></div></div>`).join('');
   showPage('pageAllArticles');
 }
 function showArticlesByUser(email){
-  const name=(PROFILES[email]||{name:email.split('@')[0]}).name;
-  const list=DB.filter(d=>d.author===email);
+  const name=(PROFILES[email]||{name:email.split('@')[0]}).name;const list=DB.filter(d=>d.author===email);
   const label=`บทความของ ${name} (${list.length})`;
-  document.getElementById('allArticlesLabel').textContent=label;
-  document.getElementById('allArticlesSectionLabel').textContent=label;
-  document.getElementById('allArticlesList').innerHTML=list.length
-    ?list.map(a=>`<div class="all-article-item" onclick="openArticle(${a.id})">
-        <div class="result-dot">◆</div>
-        <div><div class="aai-title">${a.title}</div><div class="aai-meta">${CATS[a.type].label} · ${a.date}</div></div>
-      </div>`).join('')
-    :'<div class="empty">ยังไม่มีบทความ</div>';
+  document.getElementById('allArtLabel').textContent=label;document.getElementById('allArtSlabel').textContent=label;
+  document.getElementById('allArtList').innerHTML=list.length?list.map(a=>`<div class="aai" onclick="openArticle(${a.id})"><div class="rdot">◆</div><div><div class="aai-title">${a.title}</div><div class="aai-meta">${CATS[a.type].label} · ${a.date}</div></div></div>`).join(''):'<div class="empty">ยังไม่มีบทความ</div>';
   showPage('pageAllArticles');
 }
-function changeRole(email,role){
-  USERS[email].role=role;
-  if(email===currentUser)document.getElementById('adminNavBtn').style.display=role==='admin'?'flex':'none';
-}
+function changeRole(email,role){USERS[email].role=role;if(email===currentUser)renderTopNav();}
 function addUser(){
-  const email=document.getElementById('newUserEmail').value.trim().toLowerCase();
-  const role=document.getElementById('newUserRole').value;
-  if(!email||!email.endsWith('@bbd.co.th')){alert('ใช้ได้เฉพาะ @bbd.co.th เท่านั้น');return;}
+  const email=document.getElementById('newUserEmail').value.trim().toLowerCase();const role=document.getElementById('newUserRole').value;
+  if(!email||!email.endsWith('@bakebread.digital')){alert('ใช้ได้เฉพาะ @bakebread.digital เท่านั้น');return;}
   if(USERS[email]){alert('Email นี้มีอยู่แล้ว');return;}
-  USERS[email]={pass:'1234',name:email.split('@')[0],role};
-  PROFILES[email]={name:email.split('@')[0],avatar:null};
-  ACTIVITY.unshift({text:`Admin เพิ่ม user "${email}" (${role})`,time:'เมื่อกี้',articleId:null});
-  document.getElementById('newUserEmail').value='';
-  renderAdminUsers();renderAdminStats();
+  USERS[email]={pass:'1234',name:email.split('@')[0],role};PROFILES[email]={name:email.split('@')[0],avatar:null};
+  ACTIVITY.unshift({text:`Admin เพิ่ม user "${email}"`,time:'เมื่อกี้',articleId:null});
+  document.getElementById('newUserEmail').value='';renderAdminUsers();renderAdminStats();
 }
+
+/* CRUD */
 function openAddModal(){
-  editingId=null;
-  document.getElementById('modalFormTitle').textContent='เพิ่ม Insight ใหม่';
+  editingId=null;document.getElementById('modalFormTitle').textContent='เพิ่ม Insight ใหม่';
   ['fTitle','fSub','fBody','fTags','fClient','fPlatform'].forEach(id=>document.getElementById(id).value='');
-  document.getElementById('fType').value='camp';
-  document.getElementById('modalForm').classList.add('open');
+  document.getElementById('fType').value='camp';document.getElementById('modalForm').classList.add('open');
 }
 function openEditModal(id){
-  editingId=id;
-  const a=DB.find(d=>d.id===id);
+  if(!currentUser){requireLogin(()=>openEditModal(id),'กรุณาเข้าสู่ระบบก่อนแก้ไข');return;}
+  editingId=id;const a=DB.find(d=>d.id===id);
   document.getElementById('modalFormTitle').textContent='แก้ไข Insight';
-  document.getElementById('fType').value=a.type;
-  document.getElementById('fTitle').value=a.title;
-  document.getElementById('fSub').value=a.sub;
-  document.getElementById('fBody').value=a.body;
-  document.getElementById('fTags').value=a.tags.join(', ');
-  document.getElementById('fClient').value=a.client;
-  document.getElementById('fPlatform').value=a.platform;
+  document.getElementById('fType').value=a.type;document.getElementById('fTitle').value=a.title;document.getElementById('fSub').value=a.sub;
+  document.getElementById('fBody').value=a.body;document.getElementById('fTags').value=a.tags.join(', ');
+  document.getElementById('fClient').value=a.client;document.getElementById('fPlatform').value=a.platform;
   document.getElementById('modalForm').classList.add('open');
 }
 function saveInsight(){
-  const title=document.getElementById('fTitle').value.trim();
-  const body=document.getElementById('fBody').value.trim();
-  if(!title)return;
+  const title=document.getElementById('fTitle').value.trim();const body=document.getElementById('fBody').value.trim();if(!title)return;
   const tags=document.getElementById('fTags').value.split(',').map(t=>t.trim()).filter(Boolean);
-  const pname=PROFILES[currentUser]?PROFILES[currentUser].name:currentUser.split('@')[0];
+  const pname=PROFILES[currentUser]?.name||currentUser.split('@')[0];
   if(editingId){
     const idx=DB.findIndex(d=>d.id===editingId);
-    DB[idx]={...DB[idx],
-      type:document.getElementById('fType').value,title,
-      sub:document.getElementById('fSub').value.trim()||'ทั่วไป',
-      body,tags,
-      client:document.getElementById('fClient').value.trim()||'—',
-      platform:document.getElementById('fPlatform').value.trim()||'—'};
+    DB[idx]={...DB[idx],type:document.getElementById('fType').value,title,sub:document.getElementById('fSub').value.trim()||'ทั่วไป',body,tags,client:document.getElementById('fClient').value.trim()||'—',platform:document.getElementById('fPlatform').value.trim()||'—'};
     ACTIVITY.unshift({text:`${pname} แก้ไข "${title}"`,time:'เมื่อกี้',articleId:editingId});
+    saveToSheets('update',DB[DB.findIndex(d=>d.id===editingId)]);
     closeModal('modalForm');openArticle(editingId);
-  } else {
-    const n={id:Date.now(),
-      type:document.getElementById('fType').value,
-      sub:document.getElementById('fSub').value.trim()||'ทั่วไป',
-      title,body,tags,
-      client:document.getElementById('fClient').value.trim()||'—',
-      platform:document.getElementById('fPlatform').value.trim()||'—',
-      date:today(),author:currentUser,comments:[]};
-    DB.unshift(n);
-    ACTIVITY.unshift({text:`${pname} เพิ่ม insight "${title}"`,time:'เมื่อกี้',articleId:n.id});
-    closeModal('modalForm');renderHome();openArticle(n.id);
+  }else{
+    const n={id:Date.now(),type:document.getElementById('fType').value,sub:document.getElementById('fSub').value.trim()||'ทั่วไป',title,body,tags,client:document.getElementById('fClient').value.trim()||'—',platform:document.getElementById('fPlatform').value.trim()||'—',date:today(),author:currentUser,comments:[]};
+    DB.unshift(n);ACTIVITY.unshift({text:`${pname} เพิ่ม insight "${title}"`,time:'เมื่อกี้',articleId:n.id});
+    saveToSheets('create',n);closeModal('modalForm');renderHome();openArticle(n.id);
   }
   renderHome();
 }
 function openDelModal(id,type){
+  if(!currentUser){requireLogin(()=>openDelModal(id,type),'กรุณาเข้าสู่ระบบก่อนลบ');return;}
   deletingId=id;deletingType=type;
-  if(type==='article'){
-    const art=DB.find(d=>d.id===id);
-    document.getElementById('delModalText').textContent=`ต้องการลบ "${art.title}" ใช่ไหม? บทความจะถูกลบออกจากระบบ`;
-    document.getElementById('delConfirmBtn').onclick=confirmDelete;
-  } else {
-    document.getElementById('delModalText').textContent=`ต้องการลบ user "${id}" ออกจากระบบใช่ไหม? บทความที่เขียนไว้จะยังถูกเก็บไว้`;
-    document.getElementById('delConfirmBtn').onclick=confirmDeleteUser;
-  }
+  if(type==='article'){const art=DB.find(d=>d.id===id);document.getElementById('delModalText').textContent=`ต้องการลบ "${art.title}" ใช่ไหม?`;document.getElementById('delConfirmBtn').onclick=confirmDelete;}
+  else{document.getElementById('delModalText').textContent=`ต้องการลบ user "${id}" ออกจากระบบใช่ไหม? บทความยังถูกเก็บไว้`;document.getElementById('delConfirmBtn').onclick=confirmDeleteUser;}
   document.getElementById('modalDel').classList.add('open');
 }
 function confirmDelete(){
-  DB=DB.filter(d=>d.id!==deletingId);
-  closeModal('modalDel');renderHome();
+  saveToSheets('delete',{id:deletingId});DB=DB.filter(d=>d.id!==deletingId);closeModal('modalDel');renderHome();
   if(document.getElementById('pageProfile').classList.contains('active'))renderProfile();
   else if(document.getElementById('pageAdmin').classList.contains('active')){renderAdminUsers();renderAdminStats();}
   else goHome();
 }
-function confirmDeleteUser(){
-  delete USERS[deletingId];
-  closeModal('modalDel');
-  renderAdminUsers();renderAdminStats();
-}
+function confirmDeleteUser(){delete USERS[deletingId];closeModal('modalDel');renderAdminUsers();renderAdminStats();}
 function closeModal(id){document.getElementById(id).classList.remove('open');}
+
+/* INIT */
+renderHome();
+renderTopNav();
+loadFromSheets();
 </script>
 </body>
 </html>
