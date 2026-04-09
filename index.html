@@ -343,7 +343,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
    ================================================================ */
 
 const SHEET_ID = '1X2Qfkvkb4XGotBYesjfHn-TfqArk3LoxmiHgskEsG3s';
-const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwJVLvs5kNpmrbhSHjR5VGGVpuVbgfiT6kVKgDR8qUjE3lBQspnlZktYWBkpymoPYUmqw/exec';
+const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwwgrOR9eJ7hU9JQlMSpdulfK9WBkhGUnbsTpiluTJIrA60GjJrmG1tX20EUB7N90rx9A/exec';
 const USE_SHEETS = true;
 
 /* ================================================================
@@ -642,7 +642,11 @@ function showArticlesByUser(email){
   document.getElementById('allArtList').innerHTML=list.length?list.map(a=>`<div class="aai" onclick="openArticle(${a.id})"><div class="rdot">◆</div><div><div class="aai-title">${a.title}</div><div class="aai-meta">${CATS[a.type].label} · ${a.date}</div></div></div>`).join(''):'<div class="empty">ยังไม่มีบทความ</div>';
   showPage('pageAllArticles');
 }
-function changeRole(email,role){USERS[email].role=role;if(email===currentUser)renderTopNav();}
+function changeRole(email,role){
+  USERS[email].role=role;
+  if(email===currentUser)renderTopNav();
+  saveToSheets('updateRole',{email,role});
+}
 function addUser(){
   const email=document.getElementById('newUserEmail').value.trim().toLowerCase();const role=document.getElementById('newUserRole').value;
   if(!email||!email.endsWith('@bakebread.digital')){alert('ใช้ได้เฉพาะ @bakebread.digital เท่านั้น');return;}
@@ -706,6 +710,35 @@ if(_saved && USERS[_saved]) currentUser = _saved;
 renderHome();
 renderTopNav();
 loadFromSheets();
+
+// Auto-sync ทุก 5 วินาที
+setInterval(async () => {
+  try {
+    const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&sheet=articles&_=${Date.now()}`;
+    const res = await fetch(url);
+    const text = await res.text();
+    const json = JSON.parse(text.substring(47, text.length - 2));
+    const rows = json.table.rows;
+    if (rows && rows.length > 0) {
+      DB = rows.map(r => ({
+        id: Number(r.c[0]?.v || Date.now()),
+        type: r.c[1]?.v || 'camp',
+        sub: r.c[2]?.v || 'ทั่วไป',
+        title: r.c[3]?.v || '',
+        body: r.c[4]?.v || '',
+        tags: (r.c[5]?.v || '').split(',').map(t => t.trim()).filter(Boolean),
+        client: r.c[6]?.v || '—',
+        platform: r.c[7]?.v || '—',
+        date: r.c[8]?.v || today(),
+        author: r.c[9]?.v || '',
+        comments: JSON.parse(r.c[10]?.v || '[]'),
+      }));
+      // อัปเดตหน้าที่กำลังดูอยู่เงียบๆ
+      const activePage = document.querySelector('.page.active')?.id;
+      if (activePage === 'pageHome') renderHome();
+    }
+  } catch(e) { /* silent fail */ }
+}, 5000);
 </script>
 </body>
 </html>
